@@ -10,10 +10,29 @@ class WelcomeScreen extends StatelessWidget {
         child: Padding(
           padding: const EdgeInsets.all(20.0),
           child: Column(
-            mainAxisSize: MainAxisSize.max,
             mainAxisAlignment: MainAxisAlignment.center,
+            crossAxisAlignment: CrossAxisAlignment.center,
             children: [
-              Image.asset('assets/Iraq.png'),
+              Stack(
+                children: [
+                  Image.asset(
+                    'assets/Iraqpost.png',
+                    fit: BoxFit.cover,
+                    height: 120,
+                    width: 146,
+                  ),
+                  const Positioned(
+                      child: Align(
+                    alignment: Alignment.bottomRight,
+                    child: Text(
+                      'IRAQ POST',
+                      style: TextStyle(
+                          fontFamily: 'Ruvary', fontWeight: FontWeight.bold),
+                      textAlign: TextAlign.center,
+                    ),
+                  )),
+                ],
+              ),
               const SizedBox(
                   height:
                       10), // Adjust the height of the space between the image and the text
@@ -21,6 +40,7 @@ class WelcomeScreen extends StatelessWidget {
                 'POWERED BY BANAN',
                 style: TextStyle(
                   color: Color.fromARGB(255, 8, 88, 17),
+                  fontFamily: 'Notosans',
                   fontSize: 15,
                   fontWeight: FontWeight.w400,
                 ),
@@ -32,9 +52,10 @@ class WelcomeScreen extends StatelessWidget {
                 TextSpan(
                   children: [
                     TextSpan(
-                      text: 'welcome to Iraq Post and ',
+                      text: 'welcome to Iraq Post and enjoy our service',
                       style: TextStyle(
                         color: Colors.black,
+                        fontFamily: 'Notosans',
                         fontSize: 25,
                         fontWeight: FontWeight.w500,
                       ),
@@ -85,33 +106,32 @@ class WelcomeScreen extends StatelessWidget {
                   // Add your navigation logic here
                 },
                 style: ElevatedButton.styleFrom(
-                    backgroundColor: Colors.white,
-                    side: const BorderSide(
-                        color: Color.fromARGB(
-                            255, 12, 6, 118)) // Set button color to white
-                    ),
+                  backgroundColor: Colors.white,
+                  side: const BorderSide(
+                    color: Color.fromARGB(255, 12, 6, 118),
+                  ), // Set button color to white
+                ),
                 child: const Padding(
                   padding: EdgeInsets.symmetric(horizontal: 70),
                   child: Text(
                     'Login',
                     style: TextStyle(
-                        fontSize: 20, color: Color.fromARGB(255, 8, 49, 111)),
+                      fontSize: 20,
+                      color: Color.fromARGB(255, 8, 49, 111),
+                    ),
                   ),
                 ),
               ),
-              const SizedBox(height: 10), 
+              const SizedBox(height: 10),
               GestureDetector(
-                onTap: () {
-                  
-                },
+                onTap: () {},
                 child: const Text(
                   'Continue as a guest',
                   style: TextStyle(
                     fontSize: 15,
                     fontWeight: FontWeight.bold,
                     color: Color.fromARGB(255, 8, 49, 111),
-                    decoration:
-                        TextDecoration.underline, 
+                    decoration: TextDecoration.underline,
                   ),
                 ),
               ),

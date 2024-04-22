@@ -1,249 +1,365 @@
 import 'package:flutter/material.dart';
 
-class RegisterPage extends StatelessWidget {
+class RegisterPage extends StatefulWidget {
   const RegisterPage({super.key});
 
   @override
+  _RegisterPageState createState() => _RegisterPageState();
+}
+
+class _RegisterPageState extends State<RegisterPage> {
+  bool _isButtonEnabled = false;
+  bool _isEmailFilled = false;
+  bool _isPasswordFilled = false;
+  bool _isConfirmPasswordFilled = false;
+
+  void _checkButtonEnabled() {
+    setState(() {
+      _isButtonEnabled =
+          _isEmailFilled && _isPasswordFilled && _isConfirmPasswordFilled;
+    });
+  }
+
+  @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        leading: IconButton(
-          icon: const Icon(Icons.arrow_back),
-          onPressed: () {
-            Navigator.of(context).pop();
-          },
-        ),
-      ),
-      body: SingleChildScrollView(
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Padding(
-              padding: const EdgeInsets.all(6.0),
+    return SafeArea(
+      child: Scaffold(
+        appBar: AppBar(
+          backgroundColor: const Color(0xffF9FBFD),
+          elevation: 1,
+          leading: Container(
+            child: Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
               child: Row(
-                mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  Container(
-                    padding: const EdgeInsets.all(10.0),
-                    decoration: BoxDecoration(
-                      border: Border.all(
-                        color: const Color.fromARGB(255, 38, 128, 206),
+                  Expanded(
+                    child: IconButton(
+                      icon: const Icon(
+                        Icons.arrow_back,
                       ),
-                      borderRadius: BorderRadius.circular(15.0),
-                    ),
-                    child: const Text(
-                      'Register',
-                      style: TextStyle(
-                        fontSize: 15,
-                        fontWeight: FontWeight.w500,
-                        color: Color.fromARGB(255, 13, 50, 144),
-                      ),
+                      color: const Color(0xff5F6979),
+                      onPressed: () {
+                        Navigator.of(context).pop();
+                      },
                     ),
                   ),
-                  const SizedBox(
-                      width: 10), // Add space after the Register text
-                  _Line(),
-                  const SizedBox(width: 10), // Add space before the line
-                  const _CircularIndicator(number: '2', active: true),
-                  const SizedBox(width: 10),
-                  _Line(),
-                  const SizedBox(width: 10), // Add space before the line
-                  const _CircularIndicator(number: '3', active: true),
-                  const SizedBox(width: 10),
-                  _Line(),
-                  const SizedBox(width: 10), // Add space before the line
-                  const _CircularIndicator(number: '4', active: true),
                 ],
               ),
             ),
-            const SizedBox(height: 20),
-            // Add space between the indicators and the image
-            Align(
-              alignment: Alignment.centerLeft,
-              child: Padding(
-                padding: const EdgeInsets.only(left: 5.0),
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
+          ),
+        ),
+        backgroundColor: const Color(0xffF9FBFD),
+        body: SingleChildScrollView(
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Padding(
+                padding: const EdgeInsets.only(top: 24),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    Image.asset(
-                      'assets/Iraqpost.png', // Provide the path to your image asset
-                      width: 100, // Adjust the width as needed
-                      height: 40, // Adjust the height as needed
+                    const SizedBox(
+                      height: 32,
                     ),
-                    const SizedBox(height: 10),
-                    Padding(
-                      padding: const EdgeInsets.only(left: 20),
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          const Text(
-                            'Welcome',
-                            style: TextStyle(
-                              fontWeight: FontWeight.bold,
-                              fontSize: 30,
-                            ),
+                    Container(
+                      decoration: BoxDecoration(
+                        border: Border.all(
+                          color: const Color(0xFF7BAFD4),
+                        ),
+                        borderRadius: BorderRadius.circular(8.0),
+                      ),
+                      child: const Padding(
+                        padding:
+                            EdgeInsets.symmetric(horizontal: 16, vertical: 2.5),
+                        child: Text(
+                          'Register',
+                          style: TextStyle(
+                            fontSize: 14,
+                            fontFamily: 'Nsa',
+                            letterSpacing: -0.28,
+                            fontWeight: FontWeight.w500,
+                            color: Color(0Xff264980),
                           ),
-                          const SizedBox(height: 10),
-                          const Text(
-                            "Let's begin setting up your new account.",
-                            style: TextStyle(
-                              fontSize: 15,
-                              color: Colors.black,
-                            ),
-                          ),
-                          const SizedBox(height: 10),
-                          const Text(
-                            'Email',
-                            style: TextStyle(
-                              fontWeight: FontWeight.normal,
-                              fontSize: 15,
-                            ),
-                          ),
-                          const SizedBox(height: 10),
-                          SizedBox(
-                            width: MediaQuery.of(context).size.width *
-                                0.9, // Set width based on screen size
-                            child: TextField(
-                              decoration: InputDecoration(
-                                labelText: 'Enter your mail',
-                                prefixIcon: const Icon(Icons.email),
-                                border: OutlineInputBorder(
-                                  borderRadius: BorderRadius.circular(10.0),
-                                ),
-                                contentPadding: const EdgeInsets.symmetric(
-                                  vertical: 10,
-                                  horizontal: 20,
-                                ), // Adjust padding
-                              ),
-                            ),
-                          ),
-                          const SizedBox(height: 10),
-                          const Text(
-                            'Password',
-                            style: TextStyle(
-                              fontWeight: FontWeight.normal,
-                              fontSize: 15,
-                            ),
-                          ),
-                          const SizedBox(height: 2),
-                          SizedBox(
-                            width: MediaQuery.of(context).size.width *
-                                0.9, // Set width based on screen size
-                            child: TextField(
-                              obscureText: true,
-                              decoration: InputDecoration(
-                                labelText: 'Enter your password',
-                                prefixIcon: const Icon(Icons.lock),
-                                suffixIcon: IconButton(
-                                  icon: const Icon(Icons.visibility),
-                                  onPressed: () {
-                                    // Implement toggle visibility
-                                  },
-                                ),
-                                border: OutlineInputBorder(
-                                  borderRadius: BorderRadius.circular(10.0),
-                                ),
-                                contentPadding: const EdgeInsets.symmetric(
-                                  vertical: 10,
-                                  horizontal: 20,
-                                ), // Adjust padding
-                              ),
-                            ),
-                          ),
-                          const SizedBox(height: 10),
-                          const Text(
-                            'Confirm Password',
-                            style: TextStyle(
-                              fontWeight: FontWeight.normal,
-                              fontSize: 15,
-                            ),
-                          ),
-                          const SizedBox(height: 2),
-                          SizedBox(
-                            width: MediaQuery.of(context).size.width *
-                                0.9, // Set width based on screen size
-                            child: TextField(
-                              obscureText: true,
-                              decoration: InputDecoration(
-                                labelText: 'Confirm your password',
-                                prefixIcon: const Icon(Icons.lock),
-                                suffixIcon: IconButton(
-                                  icon: const Icon(Icons.visibility),
-                                  onPressed: () {
-                                    // Implement toggle visibility
-                                  },
-                                ),
-                                border: OutlineInputBorder(
-                                  borderRadius: BorderRadius.circular(10.0),
-                                ),
-                                contentPadding: const EdgeInsets.symmetric(
-                                  vertical: 10,
-                                  horizontal: 20,
-                                ), // Adjust padding
-                              ),
-                            ),
-                          ),
-                          const SizedBox(height: 20),
-                          SizedBox(
-                            width: MediaQuery.of(context).size.width *
-                                0.9, // Set width based on screen size
-                            child: TextButton(
-                              onPressed: () {
-                                // Add your register logic here
-                              },
-                              style: ButtonStyle(
-                                foregroundColor:
-                                    MaterialStateProperty.all<Color>(
-                                  Colors.grey[300]!,
-                                ),
-                                backgroundColor:
-                                    MaterialStateProperty.all<Color>(
-                                  const Color.fromARGB(255, 226, 230, 234),
-                                ),
-                              ),
-                              child: const Text(
-                                'Register',
-                                style: TextStyle(
-                                  color: Color.fromARGB(255, 56, 53, 53),
-                                  fontSize: 18,
-                                ),
-                              ),
-                            ),
-                          ),
-                          const SizedBox(height: 10),
-                          Row(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: [
-                              const Text(
-                                'Already a member? ',
-                                style: TextStyle(
-                                  fontSize: 16,
-                                  color: Colors.black87,
-                                ),
-                              ),
-                              InkWell(
-                                onTap: () {
-                                  // Handle login navigation
-                                },
-                                child: const Text(
-                                  'Login',
-                                  style: TextStyle(
-                                    fontSize: 16,
-                                    fontWeight: FontWeight.bold,
-                                    color: Colors.black,
-                                  ),
-                                ),
-                              ),
-                            ],
-                          ),
-                        ],
+                        ),
                       ),
                     ),
+                    const SizedBox(width: 10),
+                    const _Line(color: Color(0xff9198A3)),
+                    const SizedBox(width: 10),
+                    const _CircularIndicator(number: '2', active: true),
+                    const SizedBox(width: 10),
+                    const _Line(color: Color(0xff9198A3)),
+                    const SizedBox(width: 10),
+                    const _CircularIndicator(number: '3', active: true),
+                    const SizedBox(width: 10),
+                    const _Line(color: Color(0xff9198A3)),
+                    const SizedBox(width: 10),
+                    const _CircularIndicator(number: '4', active: true),
                   ],
                 ),
               ),
-            ),
-          ],
+              const SizedBox(height: 24),
+              Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Image.asset(
+                    'assets/Iraqpost.png',
+                    width: 100,
+                    height: 40,
+                  ),
+                  const SizedBox(height: 24),
+                  Padding(
+                    padding: const EdgeInsets.only(left: 20),
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        const Text(
+                          'Welcome',
+                          style: TextStyle(
+                              fontFamily: 'Nsa',
+                              color: Color(0xff070d17),
+                              fontSize: 26,
+                              letterSpacing: -0.48,
+                              fontWeight: FontWeight.bold),
+                        ),
+                        const SizedBox(height: 8),
+                        const Text(
+                          "Let's begin setting up your new account.",
+                          style: TextStyle(
+                            fontSize: 16,
+                            fontFamily: 'Nsa',
+                            color: Color(0xff404c5f),
+                          ),
+                        ),
+                        const SizedBox(height: 32),
+                        const Row(
+                          crossAxisAlignment: CrossAxisAlignment.baseline,
+                          textBaseline: TextBaseline.alphabetic,
+                          children: [
+                            Text(
+                              'Email',
+                              style: TextStyle(
+                                fontWeight: FontWeight.normal,
+                                fontFamily: 'Nsa',
+                                color: Color(0xff0B1627),
+                                fontSize: 15,
+                              ),
+                            ),
+                            Text(
+                              ' *',
+                              style: TextStyle(
+                                color: Colors.red,
+                                fontSize: 15,
+                              ),
+                            ),
+                          ],
+                        ),
+                        const SizedBox(height: 6),
+                        SizedBox(
+                          width: MediaQuery.of(context).size.width * 0.9,
+                          child: TextField(
+                            onChanged: (value) {
+                              setState(() {
+                                _isEmailFilled = value.isNotEmpty;
+                                _checkButtonEnabled();
+                              });
+                            },
+                            decoration: InputDecoration(
+                              labelText:
+                                  _isEmailFilled ? null : 'Enter your mail',
+                              prefixIcon: const Icon(Icons.email_outlined),
+                              border: OutlineInputBorder(
+                                borderRadius: BorderRadius.circular(8.0),
+                                borderSide: BorderSide(
+                                  color: _isEmailFilled
+                                      ? Colors.blue
+                                      : Colors.grey,
+                                ),
+                              ),
+                              contentPadding: const EdgeInsets.symmetric(
+                                vertical: 10,
+                                horizontal: 20,
+                              ),
+                            ),
+                          ),
+                        ),
+                        const SizedBox(height: 24),
+                        const Row(
+                          crossAxisAlignment: CrossAxisAlignment.baseline,
+                          textBaseline: TextBaseline.alphabetic,
+                          children: [
+                            Text(
+                              'Password',
+                              style: TextStyle(
+                                fontWeight: FontWeight.normal,
+                                fontFamily: 'Nsa',
+                                color: Color(0xff0B1627),
+                                fontSize: 15,
+                              ),
+                            ),
+                            Text(
+                              ' *',
+                              style: TextStyle(
+                                color: Colors.red,
+                                fontSize: 15,
+                              ),
+                            ),
+                          ],
+                        ),
+                        const SizedBox(height: 6),
+                        SizedBox(
+                          width: MediaQuery.of(context).size.width * 0.9,
+                          child: TextField(
+                            onChanged: (value) {
+                              setState(() {
+                                _isPasswordFilled = value.isNotEmpty;
+                                _checkButtonEnabled();
+                              });
+                            },
+                            obscureText: true,
+                            decoration: InputDecoration(
+                              labelText: _isPasswordFilled
+                                  ? null
+                                  : 'Enter your password',
+                              suffixIcon: IconButton(
+                                icon: const Icon(Icons.visibility_off_outlined),
+                                color: const Color(0xff5F6979),
+                                onPressed: () {},
+                              ),
+                              border: OutlineInputBorder(
+                                borderRadius: BorderRadius.circular(8.0),
+                                borderSide: BorderSide(
+                                  color: _isPasswordFilled
+                                      ? Colors.blue
+                                      : Colors.grey,
+                                ),
+                              ),
+                              contentPadding: const EdgeInsets.symmetric(
+                                vertical: 10,
+                                horizontal: 20,
+                              ),
+                            ),
+                          ),
+                        ),
+                        const SizedBox(height: 24),
+                        const Row(
+                          crossAxisAlignment: CrossAxisAlignment.baseline,
+                          textBaseline: TextBaseline.alphabetic,
+                          children: [
+                            Text(
+                              'Confirm Password',
+                              style: TextStyle(
+                                fontWeight: FontWeight.normal,
+                                fontFamily: 'Nsa',
+                                color: Color(0xff0B1627),
+                                fontSize: 15,
+                              ),
+                            ),
+                            Text(
+                              ' *',
+                              style: TextStyle(
+                                color: Colors.red,
+                                fontSize: 15,
+                              ),
+                            ),
+                          ],
+                        ),
+                        const SizedBox(height: 6),
+                        SizedBox(
+                          width: MediaQuery.of(context).size.width * 0.9,
+                          child: TextField(
+                            onChanged: (value) {
+                              setState(() {
+                                _isConfirmPasswordFilled = value.isNotEmpty;
+                                _checkButtonEnabled();
+                              });
+                            },
+                            obscureText: true,
+                            style: const TextStyle(fontFamily: 'Nsa'),
+                            decoration: InputDecoration(
+                              labelText: _isConfirmPasswordFilled
+                                  ? null
+                                  : 'Confirm your password',
+                              suffixIcon: IconButton(
+                                icon: const Icon(Icons.visibility_off_outlined),
+                                color: const Color(0xFF5F6979),
+                                onPressed: () {},
+                              ),
+                              border: OutlineInputBorder(
+                                borderRadius: BorderRadius.circular(8.0),
+                                borderSide: BorderSide(
+                                  color: _isConfirmPasswordFilled
+                                      ? Colors.blue
+                                      : Colors.grey,
+                                ),
+                              ),
+                              contentPadding: const EdgeInsets.symmetric(
+                                vertical: 10,
+                                horizontal: 20,
+                              ),
+                            ),
+                          ),
+                        ),
+                        const SizedBox(height: 60),
+                        SizedBox(
+                          width: MediaQuery.of(context).size.width * 0.9,
+                          child: ElevatedButton(
+                            onPressed: _isButtonEnabled ? () {} : null,
+                            style: ElevatedButton.styleFrom(
+                              foregroundColor: Colors.white,
+                              backgroundColor: _isButtonEnabled
+                                  ? const Color(0xff234274)
+                                  : const Color(0xffE9EDF2),
+                              shape: RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(8),
+                              ),
+                              minimumSize: const Size(343, 45),
+                            ),
+                            child: const Text(
+                              'Register',
+                              textAlign: TextAlign.center,
+                              style: TextStyle(
+                                color: Color(0xFF5F6979),
+                                fontWeight: FontWeight.w600,
+                                fontSize: 18,
+                                height: 0.08,
+                                letterSpacing: -0.36,
+                              ),
+                            ),
+                          ),
+                        ),
+                        const SizedBox(height: 32),
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            const Text(
+                              'Already a member? ',
+                              style: TextStyle(
+                                fontSize: 16,
+                                fontFamily: 'Nsa',
+                                color: Colors.black87,
+                              ),
+                            ),
+                            InkWell(
+                              onTap: () {},
+                              child: const Text(
+                                'Login',
+                                style: TextStyle(
+                                  fontSize: 16,
+                                  fontWeight: FontWeight.bold,
+                                  color: Color(0xff1b345b),
+                                ),
+                              ),
+                            ),
+                          ],
+                        ),
+                      ],
+                    ),
+                  ),
+                ],
+              ),
+            ],
+          ),
         ),
       ),
     );
@@ -251,10 +367,14 @@ class RegisterPage extends StatelessWidget {
 }
 
 class _CircularIndicator extends StatelessWidget {
-  final String? number;
+  final String number;
   final bool active;
 
-  const _CircularIndicator({super.key, this.number, required this.active});
+  const _CircularIndicator({
+    super.key,
+    required this.number,
+    required this.active,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -265,15 +385,16 @@ class _CircularIndicator extends StatelessWidget {
         shape: BoxShape.circle,
         color: active ? Colors.white : Colors.grey,
         border: Border.all(
-          color: Colors.black, // Set border color to black
+          color: const Color(0xff9198a3),
         ),
       ),
       child: Center(
         child: Text(
-          number!,
+          number,
           style: const TextStyle(
-            color: Colors.black, // Set text color to black
-            fontWeight: FontWeight.normal,
+            color: Color.fromARGB(255, 86, 92, 101),
+            fontWeight: FontWeight.w500,
+            fontSize: 14,
           ),
         ),
       ),
@@ -282,12 +403,19 @@ class _CircularIndicator extends StatelessWidget {
 }
 
 class _Line extends StatelessWidget {
+  final Color color;
+
+  const _Line({
+    super.key,
+    required this.color,
+  });
+
   @override
   Widget build(BuildContext context) {
     return Container(
       width: 40,
       height: 1,
-      color: const Color.fromARGB(255, 8, 14, 20),
+      color: color,
     );
   }
 }
