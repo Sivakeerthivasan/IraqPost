@@ -28,6 +28,17 @@ class _RegisterPageState extends State<RegisterPage> {
           backgroundColor: const Color(0xffF9FBFD),
           elevation: 1,
           leading: Container(
+            decoration: const BoxDecoration(
+              color: Color(0xFFF8FAFC),
+              boxShadow: [
+                BoxShadow(
+                  color: Color(0x0C000000),
+                  blurRadius: 4,
+                  offset: Offset(0, 4),
+                  spreadRadius: 0,
+                )
+              ],
+            ),
             child: Padding(
               padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
               child: Row(
@@ -76,9 +87,9 @@ class _RegisterPageState extends State<RegisterPage> {
                           style: TextStyle(
                             fontSize: 14,
                             fontFamily: 'Nsa',
-                            letterSpacing: -0.28,
+                            letterSpacing: -0.36,
                             fontWeight: FontWeight.w500,
-                            color: Color(0Xff264980),
+                            color: Color(0xFF264980),
                           ),
                         ),
                       ),
@@ -102,10 +113,11 @@ class _RegisterPageState extends State<RegisterPage> {
               Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Image.asset(
-                    'assets/Iraqpost.png',
-                    width: 100,
-                    height: 40,
+                  const Padding(
+                    padding: EdgeInsets.only(left: 20),
+                    child: Image(
+                      image: AssetImage('assets/Iraq.png'),
+                    ),
                   ),
                   const SizedBox(height: 24),
                   Padding(
@@ -166,7 +178,7 @@ class _RegisterPageState extends State<RegisterPage> {
                             },
                             decoration: InputDecoration(
                               labelText:
-                                  _isEmailFilled ? null : 'Enter your mail',
+                                  _isEmailFilled ? null : 'Enter your email',
                               prefixIcon: const Icon(Icons.email_outlined),
                               border: OutlineInputBorder(
                                 borderRadius: BorderRadius.circular(8.0),
@@ -247,7 +259,7 @@ class _RegisterPageState extends State<RegisterPage> {
                           textBaseline: TextBaseline.alphabetic,
                           children: [
                             Text(
-                              'Confirm Password',
+                              'Confirm password',
                               style: TextStyle(
                                 fontWeight: FontWeight.normal,
                                 fontFamily: 'Nsa',
@@ -304,23 +316,168 @@ class _RegisterPageState extends State<RegisterPage> {
                         SizedBox(
                           width: MediaQuery.of(context).size.width * 0.9,
                           child: ElevatedButton(
-                            onPressed: _isButtonEnabled ? () {} : null,
+                            onPressed: _isButtonEnabled
+                                ? () {
+                                    // Show AlertDialog
+                                    showDialog(
+                                      context: context,
+                                      builder: (BuildContext context) {
+                                        return Padding(
+                                          padding: const EdgeInsets.only(
+                                              bottom: 200),
+                                          child: AlertDialog(
+                                            shape: RoundedRectangleBorder(
+                                                borderRadius:
+                                                    BorderRadius.circular(4)),
+                                            backgroundColor:
+                                                const Color(0xFFF8FAFF),
+                                            title: const Text(
+                                              'Is the email provided correct?',
+                                              style: TextStyle(
+                                                fontSize: 16,
+                                                fontWeight: FontWeight.w600,
+                                                color: Color(0xFF0F1F37),
+                                                letterSpacing: -0.32,
+                                                height: 0.09,
+                                              ),
+                                            ),
+                                            content: SizedBox(
+                                              width: 400,
+                                              height: 110,
+                                              // Adjust the height as needed
+                                              child: Column(
+                                                mainAxisSize: MainAxisSize.min,
+                                                crossAxisAlignment:
+                                                    CrossAxisAlignment.start,
+                                                children: [
+                                                  const SizedBox(height: 12),
+                                                  const Text(
+                                                      'Jhonson@gmail.com'),
+                                                  const SizedBox(height: 32),
+                                                  Padding(
+                                                    padding: const EdgeInsets
+                                                        .symmetric(
+                                                        horizontal: 14),
+                                                    child: Row(
+                                                      mainAxisAlignment:
+                                                          MainAxisAlignment
+                                                              .spaceBetween,
+                                                      children: [
+                                                        SizedBox(
+                                                          width: 120,
+                                                          height: 45,
+                                                          child: ElevatedButton(
+                                                            onPressed: () {
+                                                              Navigator.of(
+                                                                      context)
+                                                                  .pop();
+                                                            },
+                                                            style: ElevatedButton
+                                                                .styleFrom(
+                                                                    elevation:
+                                                                        0,
+                                                                    shape:
+                                                                        RoundedRectangleBorder(
+                                                                      borderRadius:
+                                                                          BorderRadius.circular(
+                                                                              4),
+                                                                    ),
+                                                                    side: const BorderSide(
+                                                                        color: Color(
+                                                                            0xFF234274))),
+                                                            child: const Text(
+                                                              'Edit',
+                                                              textAlign:
+                                                                  TextAlign
+                                                                      .center,
+                                                              style: TextStyle(
+                                                                color: Color(
+                                                                    0xFF264980),
+                                                                fontSize: 18,
+                                                                fontWeight:
+                                                                    FontWeight
+                                                                        .w600,
+                                                                height: 0.08,
+                                                                letterSpacing:
+                                                                    -0.36,
+                                                              ),
+                                                            ),
+                                                          ),
+                                                        ),
+                                                        const SizedBox(
+                                                            width: 10),
+                                                        SizedBox(
+                                                          width: 120,
+                                                          height: 45,
+                                                          child: ElevatedButton(
+                                                            onPressed: () {
+                                                              Navigator.of(
+                                                                      context)
+                                                                  .pop();
+                                                            },
+                                                            style:
+                                                                ElevatedButton
+                                                                    .styleFrom(
+                                                              backgroundColor:
+                                                                  const Color(
+                                                                      0xff234274),
+                                                              shape:
+                                                                  RoundedRectangleBorder(
+                                                                borderRadius:
+                                                                    BorderRadius
+                                                                        .circular(
+                                                                            4),
+                                                              ),
+                                                            ),
+                                                            child: const Text(
+                                                              'Confirm',
+                                                              textAlign:
+                                                                  TextAlign
+                                                                      .center,
+                                                              style: TextStyle(
+                                                                fontSize: 18,
+                                                                fontWeight:
+                                                                    FontWeight
+                                                                        .w600,
+                                                                letterSpacing:
+                                                                    -0.36,
+                                                                height: 0.08,
+                                                                color: Color(
+                                                                    0xFFF7FAFF),
+                                                              ),
+                                                            ),
+                                                          ),
+                                                        )
+                                                      ],
+                                                    ),
+                                                  ),
+                                                ],
+                                              ),
+                                            ),
+                                          ),
+                                        );
+                                      },
+                                    );
+                                  }
+                                : null,
                             style: ElevatedButton.styleFrom(
                               foregroundColor: Colors.white,
                               backgroundColor: _isButtonEnabled
                                   ? const Color(0xff234274)
-                                  : const Color(0xffE9EDF2),
+                                  : const Color(0xFFF7FAFF),
                               shape: RoundedRectangleBorder(
                                 borderRadius: BorderRadius.circular(8),
                               ),
                               minimumSize: const Size(343, 45),
                             ),
-                            child: const Text(
+                            child: Text(
                               'Register',
                               textAlign: TextAlign.center,
                               style: TextStyle(
-                                color: Color(0xFF5F6979),
                                 fontWeight: FontWeight.w600,
+                                color: _isButtonEnabled
+                                    ? Colors.white
+                                    : const Color(0xFF5F6979),
                                 fontSize: 18,
                                 height: 0.08,
                                 letterSpacing: -0.36,

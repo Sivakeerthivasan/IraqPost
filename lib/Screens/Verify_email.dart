@@ -286,6 +286,6 @@ class _OTPBox extends StatelessWidget {
         ),
         onChanged: (value) {},
       ),
-    );
+    ); 
   }
 }
