@@ -218,7 +218,7 @@ class _RegisterPageState extends State<RegisterPage> {
                             ),
                           ],
                         ),
-                        const SizedBox(height: 6),
+                        const SizedBox(height: 8),
                         SizedBox(
                           width: MediaQuery.of(context).size.width * 0.9,
                           child: TextField(
@@ -344,7 +344,6 @@ class _RegisterPageState extends State<RegisterPage> {
                                             content: SizedBox(
                                               width: 400,
                                               height: 110,
-                                              // Adjust the height as needed
                                               child: Column(
                                                 mainAxisSize: MainAxisSize.min,
                                                 crossAxisAlignment:

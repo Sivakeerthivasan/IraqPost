@@ -172,7 +172,7 @@ class VerifyEmail extends StatelessWidget {
                       ),
                       const SizedBox(height: 32),
                       Container(
-                        width: 370,
+                        width: 343,
                         height: 70,
                         padding: const EdgeInsets.symmetric(
                             horizontal: 18, vertical: 10),
@@ -265,35 +265,41 @@ class VerifyEmail extends StatelessWidget {
                               ),
                             ),
                             const SizedBox(height: 28),
-                            Container(
+                            SizedBox(
                               width: 343,
                               height: 45,
-                              padding:
-                                  const EdgeInsets.symmetric(horizontal: 18),
-                              clipBehavior: Clip.antiAlias,
-                              decoration: ShapeDecoration(
-                                color: const Color(0xFFE9EDF2),
-                                shape: RoundedRectangleBorder(
-                                    borderRadius: BorderRadius.circular(8)),
-                              ),
-                              child: const Row(
-                                mainAxisSize: MainAxisSize.min,
-                                mainAxisAlignment: MainAxisAlignment.center,
-                                crossAxisAlignment: CrossAxisAlignment.center,
-                                children: [
-                                  Text(
-                                    'Continue',
-                                    textAlign: TextAlign.center,
-                                    style: TextStyle(
-                                      color: Color(0xFF5F6979),
-                                      fontSize: 18,
-                                      fontFamily: 'Noto Sans Arabic',
-                                      fontWeight: FontWeight.w600,
-                                      height: 0.08,
-                                      letterSpacing: -0.36,
+                              child: Padding(
+                                padding:
+                                    const EdgeInsets.symmetric(horizontal: 18),
+                                child: ElevatedButton(
+                                  onPressed: () {
+                                    // Add your functionality here
+                                  },
+                                  style: ElevatedButton.styleFrom(
+                                    backgroundColor: const Color(
+                                        0xFFE9EDF2), // Change text color as needed
+                                    shape: RoundedRectangleBorder(
+                                      borderRadius: BorderRadius.circular(8),
                                     ),
                                   ),
-                                ],
+                                  child: const Row(
+                                    mainAxisAlignment: MainAxisAlignment.center,
+                                    mainAxisSize: MainAxisSize.min,
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.center,
+                                    children: [
+                                      Text(
+                                        'Continue', // Change button text as needed
+                                        style: TextStyle(
+                                          color: Color(0xFF5F6979),
+                                          fontSize: 16,
+                                          fontFamily: 'Noto Sans Arabic',
+                                          fontWeight: FontWeight.bold,
+                                        ),
+                                      ),
+                                    ],
+                                  ),
+                                ),
                               ),
                             ),
                           ],
@@ -320,7 +326,7 @@ class _GreenTick extends StatelessWidget {
       decoration: BoxDecoration(
         shape: BoxShape.circle,
         border: Border.all(
-          color: Colors.green,
+          color: const Color(0xFF9198A3),
         ),
       ),
       child: const Center(
@@ -355,7 +361,7 @@ class _CircularIndicator extends StatelessWidget {
         child: Text(
           number!,
           style: const TextStyle(
-            color: Colors.black,
+            color: Color(0xFF5F6979),
             fontWeight: FontWeight.normal,
           ),
         ),
@@ -379,7 +385,56 @@ class _Line extends StatelessWidget {
   }
 }
 
-class _OTPBox extends StatelessWidget {
+class _OTPBox extends StatefulWidget {
+  @override
+  _OTPBoxState createState() => _OTPBoxState();
+}
+
+class _OTPBoxState extends State<_OTPBox> {
+  final TextEditingController _controller = TextEditingController();
+  late FocusNode _focusNode;
+  Color _borderColor = const Color(0xFF9198A3);
+  Color _textColor = Colors.black;
+  static bool allBoxesFilled = false;
+
+  @override
+  void initState() {
+    super.initState();
+    _focusNode = FocusNode();
+    _controller.addListener(_onTextChanged);
+  }
+
+  @override
+  void dispose() {
+    _controller.dispose();
+    _focusNode.dispose();
+    super.dispose();
+  }
+
+  void _onTextChanged() {
+    setState(() {
+      if (_controller.text.length == 1) {
+        FocusScope.of(context).nextFocus();
+        _borderColor = const Color(0xFF234274);
+        _textColor = const Color(0xFF234274);
+      } else {
+        _borderColor = const Color(0xFF9198A3);
+        _textColor = Colors.black;
+      }
+
+      allBoxesFilled = _checkAllBoxesFilled();
+    });
+  }
+
+  bool _checkAllBoxesFilled() {
+    for (int i = 0; i < 5; i++) {
+      if (_controller.text.isEmpty) {
+        return false;
+      }
+    }
+    return true;
+  }
+
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -388,19 +443,26 @@ class _OTPBox extends StatelessWidget {
       height: 40,
       decoration: BoxDecoration(
         border: Border.all(
-          color: const Color(0xFF9198A3), // Set border color to blue
+          color: _borderColor,
         ),
         borderRadius: BorderRadius.circular(8),
       ),
       child: TextField(
+        controller: _controller,
+        focusNode: _focusNode,
         textAlign: TextAlign.center,
         maxLength: 1,
         keyboardType: TextInputType.number,
+        style: TextStyle(color: _textColor),
         decoration: const InputDecoration(
           counterText: '',
           border: InputBorder.none,
         ),
-        onChanged: (value) {},
+        onChanged: (value) {
+          setState(() {
+            allBoxesFilled = _checkAllBoxesFilled();
+          });
+        },
       ),
     );
   }
