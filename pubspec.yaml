@@ -36,6 +36,8 @@ dependencies:
   # The following adds the Cupertino Icons font to your application.
   # Use with the CupertinoIcons class for iOS style icons.
   cupertino_icons: ^1.0.6
+  flutter_svg: ^2.0.10+1
+  google_fonts: ^6.2.1
   
 
 dev_dependencies:
@@ -76,16 +78,16 @@ flutter:
   # "family" key with the font family name, and a "fonts" key with a
   # list giving the asset and other descriptors for the font. For
   # example:
-  fonts:
-    - family: Ruvary
-      fonts:
-        - asset: assets/fonts/ruvary-orbitron.ttf
-    - family: Nsa
-      fonts:
-        - asset: assets/fonts/NSA.ttf
-    - family: NsaSB
-      fonts:
-        - asset: assets/fonts/NSA-Semibold.ttf
+  #fonts:
+  #  - family: Ruvary
+  #    fonts:
+  #      - asset: assets/fonts/ruvary-orbitron.ttf
+  #  - family: Nsa
+  #    fonts:
+  #      - asset: assets/fonts/NSA.ttf
+  #  - family: NsaSB
+  #    fonts:
+  #      - asset: assets/fonts/NSA-Semibold.ttf
   # - asset: fonts/Schyler-Italic.ttf
   #         style: italic
   #   - family: Trajan Pro

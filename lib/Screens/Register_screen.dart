@@ -1,4 +1,13 @@
+// ignore_for_file: sized_box_for_whitespace
+
+import 'dart:ui';
+
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/rendering.dart';
+import 'package:flutter/widgets.dart';
+import 'package:google_fonts/google_fonts.dart';
+import 'package:iraq_post/Screens/Verify_email.dart';
 
 class RegisterPage extends StatefulWidget {
   const RegisterPage({super.key});
@@ -13,6 +22,10 @@ class _RegisterPageState extends State<RegisterPage> {
   bool _isPasswordFilled = false;
   bool _isConfirmPasswordFilled = false;
 
+  final _emailFocusNode = FocusNode();
+  final _passwordFocusNode = FocusNode();
+  final _confirmPasswordFocusNode = FocusNode();
+
   void _checkButtonEnabled() {
     setState(() {
       _isButtonEnabled =
@@ -21,93 +34,111 @@ class _RegisterPageState extends State<RegisterPage> {
   }
 
   @override
+  void dispose() {
+    _emailFocusNode.dispose();
+    _passwordFocusNode.dispose();
+    _confirmPasswordFocusNode.dispose();
+    super.dispose();
+  }
+
+  @override
   Widget build(BuildContext context) {
     return SafeArea(
       child: Scaffold(
-        appBar: AppBar(
-          backgroundColor: const Color(0xffF9FBFD),
-          elevation: 1,
-          leading: Container(
-            decoration: const BoxDecoration(
-              color: Color(0xFFF8FAFC),
-              boxShadow: [
-                BoxShadow(
-                  color: Color(0x0C000000),
-                  blurRadius: 4,
-                  offset: Offset(0, 4),
-                  spreadRadius: 0,
-                )
-              ],
-            ),
-            child: Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
-              child: Row(
-                children: [
-                  Expanded(
-                    child: IconButton(
-                      icon: const Icon(
-                        Icons.arrow_back,
-                      ),
-                      color: const Color(0xff5F6979),
-                      onPressed: () {
-                        Navigator.of(context).pop();
-                      },
-                    ),
-                  ),
-                ],
-              ),
-            ),
-          ),
-        ),
-        backgroundColor: const Color(0xffF9FBFD),
         body: SingleChildScrollView(
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Padding(
-                padding: const EdgeInsets.only(top: 24),
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    const SizedBox(
-                      height: 32,
-                    ),
-                    Container(
-                      decoration: BoxDecoration(
-                        border: Border.all(
-                          color: const Color(0xFF7BAFD4),
-                        ),
-                        borderRadius: BorderRadius.circular(8.0),
-                      ),
-                      child: const Padding(
-                        padding:
-                            EdgeInsets.symmetric(horizontal: 16, vertical: 2.5),
-                        child: Text(
-                          'Register',
-                          style: TextStyle(
-                            fontSize: 14,
-                            fontFamily: 'Nsa',
-                            letterSpacing: -0.36,
-                            fontWeight: FontWeight.w500,
-                            color: Color(0xFF264980),
-                          ),
-                        ),
-                      ),
-                    ),
-                    const SizedBox(width: 10),
-                    const _Line(color: Color(0xff9198A3)),
-                    const SizedBox(width: 10),
-                    const _CircularIndicator(number: '2', active: true),
-                    const SizedBox(width: 10),
-                    const _Line(color: Color(0xff9198A3)),
-                    const SizedBox(width: 10),
-                    const _CircularIndicator(number: '3', active: true),
-                    const SizedBox(width: 10),
-                    const _Line(color: Color(0xff9198A3)),
-                    const SizedBox(width: 10),
-                    const _CircularIndicator(number: '4', active: true),
+              Container(
+                width: 374,
+                height: 40,
+                padding: const EdgeInsets.only(
+                  top: 8,
+                  left: 10,
+                  right: 30, // Corrected padding
+                  bottom: 8,
+                ),
+                decoration: const BoxDecoration(
+                  color: Color(0xFFF8FAFC),
+                  boxShadow: [
+                    BoxShadow(
+                      color: Color(0x0C000000),
+                      blurRadius: 4,
+                      offset: Offset(0, 4),
+                      spreadRadius: 0,
+                    )
                   ],
                 ),
+                child: Row(
+                  mainAxisSize: MainAxisSize.min,
+                  mainAxisAlignment: MainAxisAlignment.start,
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  children: [
+                    IconButton(
+                      onPressed: () {
+                        Navigator.pop(context);
+                      },
+                      icon: const Icon(Icons.arrow_back),
+                      color: const Color(0xFF5F6979),
+                    ),
+                  ],
+                ),
+              ),
+              const SizedBox(height: 20),
+              Container(
+                padding: const EdgeInsets.only(left: 15),
+                height: 30,
+                child: Row(
+                    mainAxisSize: MainAxisSize.min,
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    crossAxisAlignment: CrossAxisAlignment.end,
+                    children: [
+                      Row(
+                        mainAxisSize: MainAxisSize.min,
+                        mainAxisAlignment: MainAxisAlignment.start,
+                        crossAxisAlignment: CrossAxisAlignment.center,
+                        children: [
+                          Container(
+                            width: 85,
+                            height: 25,
+                            padding: const EdgeInsets.symmetric(horizontal: 8),
+                            decoration: BoxDecoration(
+                              border: Border.all(
+                                color: const Color(0xFF7BAFD4),
+                              ),
+                              borderRadius: BorderRadius.circular(8.0),
+                            ),
+                            child: Row(
+                              mainAxisSize: MainAxisSize.min,
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              crossAxisAlignment: CrossAxisAlignment.center,
+                              children: [
+                                Text('Register',
+                                    style: GoogleFonts.notoSansArabic(
+                                      fontSize: 14,
+                                      height: 0.10,
+                                      letterSpacing: -0.28,
+                                      fontWeight: FontWeight.w500,
+                                      color: const Color(0xFF264980),
+                                    )),
+                              ],
+                            ),
+                          ),
+                          const SizedBox(width: 10),
+                          const _Line(color: Color(0xff9198A3)),
+                          const SizedBox(width: 10),
+                          const _CircularIndicator(number: '2', active: true),
+                          const SizedBox(width: 10),
+                          const _Line(color: Color(0xff9198A3)),
+                          const SizedBox(width: 10),
+                          const _CircularIndicator(number: '3', active: true),
+                          const SizedBox(width: 10),
+                          const _Line(color: Color(0xff9198A3)),
+                          const SizedBox(width: 10),
+                          const _CircularIndicator(number: '4', active: true),
+                        ],
+                      ),
+                    ]),
               ),
               const SizedBox(height: 24),
               Column(
@@ -119,73 +150,150 @@ class _RegisterPageState extends State<RegisterPage> {
                       image: AssetImage('assets/Iraq.png'),
                     ),
                   ),
-                  const SizedBox(height: 24),
+                  const SizedBox(height: 26),
                   Padding(
                     padding: const EdgeInsets.only(left: 20),
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        const Text(
+                        Text(
                           'Welcome',
-                          style: TextStyle(
-                              fontFamily: 'Nsa',
-                              color: Color(0xff070d17),
-                              fontSize: 26,
-                              letterSpacing: -0.48,
-                              fontWeight: FontWeight.bold),
+                          style: GoogleFonts.notoSansArabic(
+                              color: const Color(0xFF070D17),
+                              fontSize: 24,
+                              fontWeight: FontWeight.w600,
+                              height: 0.05,
+                              letterSpacing: -0.48),
                         ),
-                        const SizedBox(height: 8),
-                        const Text(
+                        const SizedBox(height: 22),
+                        Text(
                           "Let's begin setting up your new account.",
-                          style: TextStyle(
+                          style: GoogleFonts.notoSansArabic(
                             fontSize: 16,
-                            fontFamily: 'Nsa',
-                            color: Color(0xff404c5f),
+                            height: 0.9,
+                            letterSpacing: -0.32,
+                            fontWeight: FontWeight.w400,
+                            color: const Color(0xFF404C5F),
                           ),
                         ),
-                        const SizedBox(height: 32),
-                        const Row(
+                        const SizedBox(height: 16),
+                        Padding(
+                          padding: const EdgeInsets.only(right: 40),
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceAround,
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Container(
+                                width: 154,
+                                height: 28,
+                                child: Padding(
+                                  padding: const EdgeInsets.symmetric(),
+                                  child: ElevatedButton(
+                                    onPressed: () {
+                                      // Handle onPressed for Register with Email button
+                                    },
+                                    style: ElevatedButton.styleFrom(
+                                      backgroundColor: const Color(0xFF234274),
+                                      shape: RoundedRectangleBorder(
+                                        borderRadius: BorderRadius.circular(4),
+                                      ),
+                                    ),
+                                    child: Text(
+                                      'Email ID',
+                                      style: GoogleFonts.notoSansArabic(
+                                        color: const Color(0xFFF7FAFF),
+                                        fontSize: 12,
+                                        fontWeight: FontWeight.w500,
+                                        height: 0.12,
+                                        letterSpacing: -0.24,
+                                      ),
+                                    ),
+                                  ),
+                                ),
+                              ),
+                              const SizedBox(width: 2),
+                              // Add some space between the buttons
+                              Container(
+                                width: 154,
+                                height: 28,
+                                child: ElevatedButton(
+                                  onPressed: () {
+                                    // Handle onPressed for Register with National ID button
+                                  },
+                                  style: ElevatedButton.styleFrom(
+                                    backgroundColor: Colors.white,
+                                    shape: RoundedRectangleBorder(
+                                      side: const BorderSide(
+                                          color: Color(0xFF709FC1)),
+                                      borderRadius: BorderRadius.circular(4),
+                                    ),
+                                  ),
+                                  child: Text(' National ID',
+                                      style: GoogleFonts.notoSansArabic(
+                                        color: const Color(0xFF234274),
+                                        fontSize: 12,
+                                        fontWeight: FontWeight.w500,
+                                        height: 0.12,
+                                        letterSpacing: -0.24,
+                                      )),
+                                ),
+                              ),
+                            ],
+                          ),
+                        ),
+                        const SizedBox(height: 26),
+                        Row(
                           crossAxisAlignment: CrossAxisAlignment.baseline,
                           textBaseline: TextBaseline.alphabetic,
                           children: [
                             Text(
                               'Email',
-                              style: TextStyle(
-                                fontWeight: FontWeight.normal,
-                                fontFamily: 'Nsa',
-                                color: Color(0xff0B1627),
-                                fontSize: 15,
-                              ),
+                              style: GoogleFonts.notoSansArabic(
+                                  color: const Color(0xFF0B1627),
+                                  fontSize: 14,
+                                  fontWeight: FontWeight.w500,
+                                  height: 0.10,
+                                  letterSpacing: -0.28),
                             ),
-                            Text(
+                            const Text(
                               ' *',
                               style: TextStyle(
                                 color: Colors.red,
-                                fontSize: 15,
+                                fontSize: 14,
+                                height: 0.09,
+                                letterSpacing: -0.32,
                               ),
                             ),
                           ],
                         ),
-                        const SizedBox(height: 6),
+                        const SizedBox(height: 12),
                         SizedBox(
-                          width: MediaQuery.of(context).size.width * 0.9,
+                          height: 44,
+                          width: 345,
                           child: TextField(
+                            focusNode: _emailFocusNode,
                             onChanged: (value) {
                               setState(() {
                                 _isEmailFilled = value.isNotEmpty;
                                 _checkButtonEnabled();
                               });
                             },
+                            style: const TextStyle(
+                              color: Color(0xFF5F6979),
+                              fontWeight: FontWeight.w400,
+                            ),
                             decoration: InputDecoration(
                               labelText:
                                   _isEmailFilled ? null : 'Enter your email',
-                              prefixIcon: const Icon(Icons.email_outlined),
+                              prefixIcon:
+                                  const Icon(Icons.email_outlined, size: 20),
                               border: OutlineInputBorder(
                                 borderRadius: BorderRadius.circular(8.0),
                                 borderSide: BorderSide(
-                                  color: _isEmailFilled
-                                      ? Colors.blue
-                                      : Colors.grey,
+                                  color:
+                                      _emailFocusNode.hasFocus || _isEmailFilled
+                                          ? Colors.blue
+                                          : Colors.grey,
                                 ),
                               ),
                               contentPadding: const EdgeInsets.symmetric(
@@ -195,33 +303,38 @@ class _RegisterPageState extends State<RegisterPage> {
                             ),
                           ),
                         ),
-                        const SizedBox(height: 24),
-                        const Row(
+                        const SizedBox(height: 30),
+                        Row(
                           crossAxisAlignment: CrossAxisAlignment.baseline,
                           textBaseline: TextBaseline.alphabetic,
                           children: [
                             Text(
                               'Password',
-                              style: TextStyle(
+                              style: GoogleFonts.notoSansArabic(
                                 fontWeight: FontWeight.normal,
-                                fontFamily: 'Nsa',
-                                color: Color(0xff0B1627),
-                                fontSize: 15,
+                                color: const Color(0xff0B1627),
+                                fontSize: 14,
+                                height: 0.09,
+                                letterSpacing: -0.32,
                               ),
                             ),
-                            Text(
+                            const Text(
                               ' *',
                               style: TextStyle(
                                 color: Colors.red,
                                 fontSize: 15,
+                                height: 0.09,
+                                letterSpacing: -0.32,
                               ),
                             ),
                           ],
                         ),
-                        const SizedBox(height: 8),
+                        const SizedBox(height: 12),
                         SizedBox(
-                          width: MediaQuery.of(context).size.width * 0.9,
+                          height: 44,
+                          width: 345,
                           child: TextField(
+                            focusNode: _passwordFocusNode,
                             onChanged: (value) {
                               setState(() {
                                 _isPasswordFilled = value.isNotEmpty;
@@ -234,16 +347,21 @@ class _RegisterPageState extends State<RegisterPage> {
                                   ? null
                                   : 'Enter your password',
                               suffixIcon: IconButton(
-                                icon: const Icon(Icons.visibility_off_outlined),
+                                icon: const Icon(
+                                  Icons.visibility_off_outlined,
+                                  size: 20,
+                                ),
                                 color: const Color(0xff5F6979),
                                 onPressed: () {},
                               ),
                               border: OutlineInputBorder(
                                 borderRadius: BorderRadius.circular(8.0),
                                 borderSide: BorderSide(
-                                  color: _isPasswordFilled
-                                      ? Colors.blue
-                                      : Colors.grey,
+                                  color: _passwordFocusNode.hasFocus
+                                      ? Colors.red
+                                      : (_isPasswordFilled
+                                          ? Colors.blue
+                                          : Colors.grey),
                                 ),
                               ),
                               contentPadding: const EdgeInsets.symmetric(
@@ -253,33 +371,38 @@ class _RegisterPageState extends State<RegisterPage> {
                             ),
                           ),
                         ),
-                        const SizedBox(height: 24),
-                        const Row(
+                        const SizedBox(height: 30),
+                        Row(
                           crossAxisAlignment: CrossAxisAlignment.baseline,
                           textBaseline: TextBaseline.alphabetic,
                           children: [
                             Text(
                               'Confirm password',
-                              style: TextStyle(
+                              style: GoogleFonts.notoSansArabic(
                                 fontWeight: FontWeight.normal,
-                                fontFamily: 'Nsa',
-                                color: Color(0xff0B1627),
-                                fontSize: 15,
+                                color: const Color(0xff0B1627),
+                                fontSize: 14,
+                                height: 0.09,
+                                letterSpacing: -0.32,
                               ),
                             ),
-                            Text(
+                            const Text(
                               ' *',
                               style: TextStyle(
                                 color: Colors.red,
                                 fontSize: 15,
+                                height: 0.09,
+                                letterSpacing: -0.32,
                               ),
                             ),
                           ],
                         ),
-                        const SizedBox(height: 6),
+                        const SizedBox(height: 12),
                         SizedBox(
-                          width: MediaQuery.of(context).size.width * 0.9,
+                          height: 44,
+                          width: 345,
                           child: TextField(
+                            focusNode: _confirmPasswordFocusNode,
                             onChanged: (value) {
                               setState(() {
                                 _isConfirmPasswordFilled = value.isNotEmpty;
@@ -287,22 +410,24 @@ class _RegisterPageState extends State<RegisterPage> {
                               });
                             },
                             obscureText: true,
-                            style: const TextStyle(fontFamily: 'Nsa'),
                             decoration: InputDecoration(
                               labelText: _isConfirmPasswordFilled
                                   ? null
                                   : 'Confirm your password',
                               suffixIcon: IconButton(
-                                icon: const Icon(Icons.visibility_off_outlined),
+                                icon: const Icon(Icons.visibility_off_outlined,
+                                    size: 20),
                                 color: const Color(0xFF5F6979),
                                 onPressed: () {},
                               ),
                               border: OutlineInputBorder(
                                 borderRadius: BorderRadius.circular(8.0),
                                 borderSide: BorderSide(
-                                  color: _isConfirmPasswordFilled
-                                      ? Colors.blue
-                                      : Colors.grey,
+                                  color: _confirmPasswordFocusNode.hasFocus
+                                      ? Colors.red
+                                      : (_isConfirmPasswordFilled
+                                          ? Colors.blue
+                                          : Colors.grey),
                                 ),
                               ),
                               contentPadding: const EdgeInsets.symmetric(
@@ -312,13 +437,13 @@ class _RegisterPageState extends State<RegisterPage> {
                             ),
                           ),
                         ),
-                        const SizedBox(height: 60),
+                        const SizedBox(height: 38),
                         SizedBox(
-                          width: MediaQuery.of(context).size.width * 0.9,
+                          height: 45,
+                          width: 343,
                           child: ElevatedButton(
                             onPressed: _isButtonEnabled
                                 ? () {
-                                    // Show AlertDialog
                                     showDialog(
                                       context: context,
                                       builder: (BuildContext context) {
@@ -328,15 +453,15 @@ class _RegisterPageState extends State<RegisterPage> {
                                           child: AlertDialog(
                                             shape: RoundedRectangleBorder(
                                                 borderRadius:
-                                                    BorderRadius.circular(4)),
+                                                    BorderRadius.circular(8)),
                                             backgroundColor:
                                                 const Color(0xFFF8FAFF),
-                                            title: const Text(
+                                            title: Text(
                                               'Is the email provided correct?',
-                                              style: TextStyle(
+                                              style: GoogleFonts.notoSansArabic(
                                                 fontSize: 16,
                                                 fontWeight: FontWeight.w600,
-                                                color: Color(0xFF0F1F37),
+                                                color: const Color(0xFF0F1F37),
                                                 letterSpacing: -0.32,
                                                 height: 0.09,
                                               ),
@@ -353,102 +478,98 @@ class _RegisterPageState extends State<RegisterPage> {
                                                   const Text(
                                                       'Jhonson@gmail.com'),
                                                   const SizedBox(height: 32),
-                                                  Padding(
-                                                    padding: const EdgeInsets
-                                                        .symmetric(
-                                                        horizontal: 14),
-                                                    child: Row(
-                                                      mainAxisAlignment:
-                                                          MainAxisAlignment
-                                                              .spaceBetween,
-                                                      children: [
-                                                        SizedBox(
-                                                          width: 120,
-                                                          height: 45,
-                                                          child: ElevatedButton(
-                                                            onPressed: () {
-                                                              Navigator.of(
-                                                                      context)
-                                                                  .pop();
-                                                            },
-                                                            style: ElevatedButton
-                                                                .styleFrom(
-                                                                    elevation:
-                                                                        0,
-                                                                    shape:
-                                                                        RoundedRectangleBorder(
-                                                                      borderRadius:
-                                                                          BorderRadius.circular(
-                                                                              4),
-                                                                    ),
-                                                                    side: const BorderSide(
-                                                                        color: Color(
-                                                                            0xFF234274))),
-                                                            child: const Text(
-                                                              'Edit',
-                                                              textAlign:
-                                                                  TextAlign
-                                                                      .center,
-                                                              style: TextStyle(
-                                                                color: Color(
-                                                                    0xFF264980),
-                                                                fontSize: 18,
-                                                                fontWeight:
-                                                                    FontWeight
-                                                                        .w600,
-                                                                height: 0.08,
-                                                                letterSpacing:
-                                                                    -0.36,
-                                                              ),
+                                                  Row(
+                                                    mainAxisAlignment:
+                                                        MainAxisAlignment
+                                                            .center,
+                                                    children: [
+                                                      SizedBox(
+                                                        width: 120,
+                                                        height: 45,
+                                                        child: ElevatedButton(
+                                                          onPressed: () {
+                                                            Navigator.of(
+                                                                    context)
+                                                                .pop();
+                                                          },
+                                                          style: ElevatedButton
+                                                              .styleFrom(
+                                                                  elevation: 0,
+                                                                  shape:
+                                                                      RoundedRectangleBorder(
+                                                                    borderRadius:
+                                                                        BorderRadius
+                                                                            .circular(4),
+                                                                  ),
+                                                                  side: const BorderSide(
+                                                                      color: Color(
+                                                                          0xFF234274))),
+                                                          child: Text(
+                                                            'Edit',
+                                                            textAlign: TextAlign
+                                                                .center,
+                                                            style: GoogleFonts
+                                                                .notoSansArabic(
+                                                              color: const Color(
+                                                                  0xFF264980),
+                                                              fontSize: 18,
+                                                              fontWeight:
+                                                                  FontWeight
+                                                                      .w600,
+                                                              height: 0.08,
+                                                              letterSpacing:
+                                                                  -0.36,
                                                             ),
                                                           ),
                                                         ),
-                                                        const SizedBox(
-                                                            width: 10),
-                                                        SizedBox(
-                                                          width: 120,
-                                                          height: 45,
-                                                          child: ElevatedButton(
-                                                            onPressed: () {
-                                                              Navigator.of(
-                                                                      context)
-                                                                  .pop();
-                                                            },
-                                                            style:
-                                                                ElevatedButton
-                                                                    .styleFrom(
-                                                              backgroundColor:
-                                                                  const Color(
-                                                                      0xff234274),
-                                                              shape:
-                                                                  RoundedRectangleBorder(
-                                                                borderRadius:
-                                                                    BorderRadius
-                                                                        .circular(
-                                                                            4),
-                                                              ),
-                                                            ),
-                                                            child: const Text(
-                                                              'Confirm',
-                                                              textAlign:
-                                                                  TextAlign
-                                                                      .center,
-                                                              style: TextStyle(
-                                                                fontSize: 18,
-                                                                fontWeight:
-                                                                    FontWeight
-                                                                        .w600,
-                                                                letterSpacing:
-                                                                    -0.36,
-                                                                height: 0.08,
-                                                                color: Color(
-                                                                    0xFFF7FAFF),
-                                                              ),
+                                                      ),
+                                                      const SizedBox(width: 14),
+                                                      SizedBox(
+                                                        width: 120,
+                                                        height: 45,
+                                                        child: ElevatedButton(
+                                                          onPressed: () {
+                                                            Navigator.push(
+                                                              context,
+                                                              MaterialPageRoute(
+                                                                  builder:
+                                                                      (context) =>
+                                                                          const VerifyEmail()),
+                                                            );
+                                                          },
+                                                          style: ElevatedButton
+                                                              .styleFrom(
+                                                            backgroundColor:
+                                                                const Color(
+                                                                    0xff234274),
+                                                            shape:
+                                                                RoundedRectangleBorder(
+                                                              borderRadius:
+                                                                  BorderRadius
+                                                                      .circular(
+                                                                          4),
                                                             ),
                                                           ),
-                                                        )
-                                                      ],
-                                                    ),
+                                                          child: Text(
+                                                            'Confirm',
+                                                            textAlign: TextAlign
+                                                                .center,
+                                                            style: GoogleFonts
+                                                                .notoSansArabic(
+                                                              fontSize: 18,
+                                                              fontWeight:
+                                                                  FontWeight
+                                                                      .w600,
+                                                              letterSpacing:
+                                                                  -0.34,
+                                                              height: 0.08,
+                                                              color: const Color(
+                                                                  0xFFF7FAFF),
+                                                            ),
+                                                          ),
+                                                        ),
+                                                      )
+                                                    ],
                                                   ),
                                                 ],
                                               ),
@@ -460,54 +581,61 @@ class _RegisterPageState extends State<RegisterPage> {
                                   }
                                 : null,
                             style: ElevatedButton.styleFrom(
-                              foregroundColor: Colors.white,
-                              backgroundColor: _isButtonEnabled
-                                  ? const Color(0xff234274)
-                                  : const Color(0xFFF7FAFF),
-                              shape: RoundedRectangleBorder(
-                                borderRadius: BorderRadius.circular(8),
-                              ),
-                              minimumSize: const Size(343, 45),
-                            ),
+                                backgroundColor: _isButtonEnabled
+                                    ? const Color(0xff234274)
+                                    : const Color(0xFFF7FAFF),
+                                shape: RoundedRectangleBorder(
+                                  borderRadius: BorderRadius.circular(8),
+                                ),
+                                minimumSize: const Size(343, 45),
+                                padding: const EdgeInsets.symmetric(
+                                    horizontal: 40, vertical: 20)),
                             child: Text(
                               'Register',
                               textAlign: TextAlign.center,
-                              style: TextStyle(
-                                fontWeight: FontWeight.w600,
-                                color: _isButtonEnabled
-                                    ? Colors.white
-                                    : const Color(0xFF5F6979),
-                                fontSize: 18,
-                                height: 0.08,
-                                letterSpacing: -0.36,
-                              ),
+                              style: GoogleFonts.notoSansArabic(
+                                  color: _isButtonEnabled
+                                      ? Colors.white
+                                      : const Color(0xFF5F6979),
+                                  fontSize: 18,
+                                  fontWeight: FontWeight.w600,
+                                  height: 0.18,
+                                  letterSpacing: -0.36),
                             ),
                           ),
                         ),
-                        const SizedBox(height: 32),
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: [
-                            const Text(
-                              'Already a member? ',
-                              style: TextStyle(
-                                fontSize: 16,
-                                fontFamily: 'Nsa',
-                                color: Colors.black87,
-                              ),
-                            ),
-                            InkWell(
-                              onTap: () {},
-                              child: const Text(
-                                'Login',
-                                style: TextStyle(
-                                  fontSize: 16,
-                                  fontWeight: FontWeight.bold,
-                                  color: Color(0xff1b345b),
+                        const SizedBox(height: 18),
+                        Container(
+                          width: 343,
+                          height: 20,
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              Text(
+                                'Already a member? ',
+                                style: GoogleFonts.notoSansArabic(
+                                  color: const Color(0xFF404C5F),
+                                  fontSize: 14,
+                                  fontWeight: FontWeight.w400,
+                                  height: 0.10,
+                                  letterSpacing: -0.28,
                                 ),
                               ),
-                            ),
-                          ],
+                              InkWell(
+                                onTap: () {},
+                                child: Text(
+                                  'Login',
+                                  style: GoogleFonts.notoSansArabic(
+                                    color: const Color(0xFF1B345B),
+                                    fontSize: 14,
+                                    fontWeight: FontWeight.w600,
+                                    height: 0.10,
+                                    letterSpacing: -0.28,
+                                  ),
+                                ),
+                              ),
+                            ],
+                          ),
                         ),
                       ],
                     ),
@@ -527,9 +655,9 @@ class _CircularIndicator extends StatelessWidget {
   final bool active;
 
   const _CircularIndicator({
-    super.key,
     required this.number,
     required this.active,
+    super.key,
   });
 
   @override
@@ -562,8 +690,8 @@ class _Line extends StatelessWidget {
   final Color color;
 
   const _Line({
-    super.key,
     required this.color,
+    super.key,
   });
 
   @override
@@ -571,7 +699,7 @@ class _Line extends StatelessWidget {
     return Container(
       width: 40,
       height: 1,
-      color: color,
+      color: const Color(0xFF9198A3),
     );
   }
 }

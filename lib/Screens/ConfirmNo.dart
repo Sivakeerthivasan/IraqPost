@@ -1,18 +1,30 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:iraq_post/Screens/Aboutyou_screen.dart';
 
-import 'ConfirmNo.dart';
-
-class VerifyEmail extends StatefulWidget {
-  const VerifyEmail({super.key});
+class ConfirmNo extends StatefulWidget {
+  const ConfirmNo({super.key});
 
   @override
-  _VerifyEmailState createState() => _VerifyEmailState();
+  _ConfirmNoState createState() => _ConfirmNoState();
 }
 
-class _VerifyEmailState extends State<VerifyEmail> {
+class _ConfirmNoState extends State<ConfirmNo> {
   bool allOTPFilled = false;
+  bool isButtonActive = false;
+
+  @override
+  void initState() {
+    super.initState();
+    allOTPFilled = false;
+    isButtonActive = false;
+  }
+
+  void _updateOTPFilled(bool isFilled) {
+    setState(() {
+      allOTPFilled = isFilled;
+      isButtonActive = isFilled;
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -28,7 +40,7 @@ class _VerifyEmailState extends State<VerifyEmail> {
                 padding: const EdgeInsets.only(
                   top: 8,
                   left: 10,
-                  right: 20, // Adjusted the right padding
+                  right: 20,
                   bottom: 8,
                 ),
                 decoration: const BoxDecoration(
@@ -75,6 +87,14 @@ class _VerifyEmailState extends State<VerifyEmail> {
                         const SizedBox(width: 10),
                         const _Line(color: Color(0xff9198A3)),
                         const SizedBox(width: 10),
+                        _GreenTick(),
+                        const SizedBox(width: 10),
+                        const _Line(color: Color(0xff9198A3)),
+                        const SizedBox(width: 10),
+                        _GreenTick(),
+                        const SizedBox(width: 10),
+                        const _Line(color: Color(0xff9198A3)),
+                        const SizedBox(width: 10),
                         Container(
                           decoration: BoxDecoration(
                             border: Border.all(
@@ -84,9 +104,11 @@ class _VerifyEmailState extends State<VerifyEmail> {
                           ),
                           child: Padding(
                             padding: const EdgeInsets.symmetric(
-                                horizontal: 7, vertical: 10),
+                              horizontal: 7,
+                              vertical: 10,
+                            ),
                             child: Text(
-                              'Verify email',
+                              'Verify phone',
                               style: GoogleFonts.notoSansArabic(
                                 color: const Color(0xFF264980),
                                 fontSize: 14,
@@ -97,18 +119,6 @@ class _VerifyEmailState extends State<VerifyEmail> {
                             ),
                           ),
                         ),
-                        const SizedBox(width: 10),
-                        const _Line(color: Color(0xff9198A3)),
-                        const SizedBox(width: 10),
-                        const _CircularIndicator(
-                          number: '3',
-                          active: true,
-                        ),
-                        const SizedBox(width: 10),
-                        const _Line(color: Color(0xff9198A3)),
-                        const SizedBox(width: 10),
-                        const _CircularIndicator(number: '4', active: true),
-                        const SizedBox(width: 10),
                       ],
                     ),
                   ],
@@ -120,8 +130,7 @@ class _VerifyEmailState extends State<VerifyEmail> {
                 children: [
                   Padding(
                     padding: const EdgeInsets.only(left: 15),
-                    child: Image.asset(
-                        'assets/Iraq.png'), // Corrected image loading
+                    child: Image.asset('assets/Iraq.png'),
                   ),
                   const SizedBox(height: 32),
                   Padding(
@@ -130,7 +139,7 @@ class _VerifyEmailState extends State<VerifyEmail> {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         Text(
-                          'Verify your email',
+                          'Confirm your number',
                           style: GoogleFonts.notoSansArabic(
                             color: const Color(0xFF070D17),
                             fontSize: 24,
@@ -139,25 +148,13 @@ class _VerifyEmailState extends State<VerifyEmail> {
                             letterSpacing: -0.48,
                           ),
                         ),
-                        const SizedBox(height: 30),
+                        const SizedBox(height: 18),
                         Text(
-                          "We have sent a vrification OTP email to",
+                          "Enter the code sent to +966123456789 to verify activate your account",
                           style: GoogleFonts.notoSansArabic(
                             color: const Color(0xFF404C5F),
                             fontSize: 16,
                             fontWeight: FontWeight.w400,
-                            height: 0.09,
-                            letterSpacing: -0.32,
-                          ),
-                        ),
-                        const SizedBox(height: 18),
-                        Text(
-                          'Jhonson@gmail.com',
-                          style: GoogleFonts.notoSansArabic(
-                            color: const Color(0xFF6E85AA),
-                            fontSize: 16,
-                            fontWeight: FontWeight.w500,
-                            height: 0.09,
                             letterSpacing: -0.32,
                           ),
                         ),
@@ -167,15 +164,15 @@ class _VerifyEmailState extends State<VerifyEmail> {
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
                             const SizedBox(width: 5),
-                            _OTPBox(setAllOTPFilled),
+                            _OTPBox(onFilled: _updateOTPFilled),
                             const SizedBox(width: 30),
-                            _OTPBox(setAllOTPFilled),
+                            _OTPBox(onFilled: _updateOTPFilled),
                             const SizedBox(width: 30),
-                            _OTPBox(setAllOTPFilled),
+                            _OTPBox(onFilled: _updateOTPFilled),
                             const SizedBox(width: 30),
-                            _OTPBox(setAllOTPFilled),
+                            _OTPBox(onFilled: _updateOTPFilled),
                             const SizedBox(width: 25),
-                            _OTPBox(setAllOTPFilled),
+                            _OTPBox(onFilled: _updateOTPFilled),
                           ],
                         ),
                         const SizedBox(height: 30),
@@ -183,12 +180,15 @@ class _VerifyEmailState extends State<VerifyEmail> {
                           width: 353,
                           height: 90,
                           padding: const EdgeInsets.symmetric(
-                              horizontal: 18, vertical: 10),
+                            horizontal: 18,
+                            vertical: 10,
+                          ),
                           clipBehavior: Clip.antiAlias,
                           decoration: ShapeDecoration(
                             color: const Color(0xFFE9EDF2),
                             shape: RoundedRectangleBorder(
-                                borderRadius: BorderRadius.circular(8)),
+                              borderRadius: BorderRadius.circular(8),
+                            ),
                           ),
                           child: Column(
                             mainAxisSize: MainAxisSize.min,
@@ -228,11 +228,14 @@ class _VerifyEmailState extends State<VerifyEmail> {
                                       size: 18,
                                       color: Color(0xFF264980),
                                     ),
-                                    const SizedBox(width: 4),
+                                    const SizedBox(
+                                      width: 4,
+                                    ),
                                     Padding(
-                                      padding: const EdgeInsets.only(bottom: 3),
+                                      padding: const EdgeInsets.only(
+                                          bottom: 4, right: 15),
                                       child: Text(
-                                        'Resend the verification email',
+                                        'Send a new code',
                                         style: GoogleFonts.notoSansArabic(
                                           color: const Color(0xFF264980),
                                           fontSize: 14,
@@ -259,28 +262,6 @@ class _VerifyEmailState extends State<VerifyEmail> {
                             mainAxisAlignment: MainAxisAlignment.start,
                             crossAxisAlignment: CrossAxisAlignment.center,
                             children: [
-                              SizedBox(
-                                width: 343,
-                                height: 45,
-                                child: Row(
-                                  mainAxisSize: MainAxisSize.min,
-                                  mainAxisAlignment: MainAxisAlignment.center,
-                                  crossAxisAlignment: CrossAxisAlignment.center,
-                                  children: [
-                                    Text(
-                                      'Continue to email app ',
-                                      style: GoogleFonts.notoSansArabic(
-                                        color: const Color(0xFF264980),
-                                        fontSize: 18,
-                                        fontWeight: FontWeight.w600,
-                                        decoration: TextDecoration.underline,
-                                        height: 0.08,
-                                        letterSpacing: -0.36,
-                                      ),
-                                    ),
-                                  ],
-                                ),
-                              ),
                               const SizedBox(height: 28),
                               SizedBox(
                                 width: 343,
@@ -289,22 +270,22 @@ class _VerifyEmailState extends State<VerifyEmail> {
                                   padding: const EdgeInsets.symmetric(
                                       horizontal: 18),
                                   child: ElevatedButton(
-                                    onPressed: allOTPFilled
+                                    onPressed: isButtonActive
                                         ? () {
+                                            // Add your functionality here
                                             Navigator.push(
                                               context,
                                               MaterialPageRoute(
                                                 builder: (context) =>
-                                                    const AboutYou(),
+                                                    const ConfirmDetails(),
                                               ),
                                             );
                                           }
                                         : null,
                                     style: ElevatedButton.styleFrom(
-                                      backgroundColor: allOTPFilled
-                                          ? const Color(0xFF264980)
+                                      backgroundColor: isButtonActive
+                                          ? Colors.blue
                                           : const Color(0xFFE9EDF2),
-                                      // Change text color as needed
                                       shape: RoundedRectangleBorder(
                                         borderRadius: BorderRadius.circular(8),
                                       ),
@@ -317,11 +298,10 @@ class _VerifyEmailState extends State<VerifyEmail> {
                                           CrossAxisAlignment.center,
                                       children: [
                                         Text(
-                                          'Continue',
-                                          // Change button text as needed
+                                          'Verify',
                                           style: GoogleFonts.notoSansArabic(
-                                            color: allOTPFilled
-                                                ? const Color(0xFFE9EDF2)
+                                            color: isButtonActive
+                                                ? Colors.white
                                                 : const Color(0xFF5F6979),
                                             fontSize: 18,
                                             fontWeight: FontWeight.w600,
@@ -345,28 +325,6 @@ class _VerifyEmailState extends State<VerifyEmail> {
             ],
           ),
         ),
-      ),
-    );
-  }
-
-  void setAllOTPFilled(bool filled) {
-    setState(() {
-      allOTPFilled = filled;
-    });
-  }
-}
-
-class ConfirmDetails extends StatelessWidget {
-  const ConfirmDetails({super.key});
-
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: const Text('Confirm Details'),
-      ),
-      body: const Center(
-        child: Text('This is the Confirm Details page'),
       ),
     );
   }
@@ -394,37 +352,6 @@ class _GreenTick extends StatelessWidget {
   }
 }
 
-class _CircularIndicator extends StatelessWidget {
-  final String? number;
-  final bool active;
-
-  const _CircularIndicator({Key? key, this.number, required this.active});
-
-  @override
-  Widget build(BuildContext context) {
-    return Container(
-      width: 30,
-      height: 29,
-      decoration: BoxDecoration(
-        shape: BoxShape.circle,
-        color: active ? Colors.white : Colors.grey,
-        border: Border.all(
-          color: const Color(0xFF9198A3),
-        ),
-      ),
-      child: Center(
-        child: Text(
-          number!,
-          style: const TextStyle(
-            color: Color(0xFF5F6979),
-            fontWeight: FontWeight.normal,
-          ),
-        ),
-      ),
-    );
-  }
-}
-
 class _Line extends StatelessWidget {
   final Color color;
 
@@ -443,7 +370,7 @@ class _Line extends StatelessWidget {
 class _OTPBox extends StatefulWidget {
   final Function(bool) onFilled;
 
-  const _OTPBox(this.onFilled);
+  const _OTPBox({required this.onFilled});
 
   @override
   _OTPBoxState createState() => _OTPBoxState();
@@ -479,8 +406,13 @@ class _OTPBoxState extends State<_OTPBox> {
         _borderColor = const Color(0xFF9198A3);
         _textColor = Colors.black;
       }
-      widget.onFilled(_controller.text.length == 1);
+
+      widget.onFilled(_checkAllBoxesFilled());
     });
+  }
+
+  bool _checkAllBoxesFilled() {
+    return _controller.text.length == 5;
   }
 
   @override
@@ -507,8 +439,26 @@ class _OTPBoxState extends State<_OTPBox> {
           border: InputBorder.none,
         ),
         onChanged: (value) {
-          setState(() {});
+          setState(() {
+            widget.onFilled(_checkAllBoxesFilled());
+          });
         },
+      ),
+    );
+  }
+}
+
+class ConfirmDetails extends StatelessWidget {
+  const ConfirmDetails({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        title: const Text('Confirm Details'),
+      ),
+      body: const Center(
+        child: Text('Confirm Details Page'),
       ),
     );
   }
@@ -516,6 +466,6 @@ class _OTPBoxState extends State<_OTPBox> {
 
 void main() {
   runApp(const MaterialApp(
-    home: VerifyEmail(),
+    home: ConfirmNo(),
   ));
 }

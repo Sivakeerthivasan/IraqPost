@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
+import 'package:iraq_post/Screens/Register_screen.dart';
 
 class WelcomeScreen extends StatelessWidget {
   const WelcomeScreen({super.key});
@@ -6,136 +8,124 @@ class WelcomeScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Center(
-        child: Padding(
-          padding: const EdgeInsets.all(20.0),
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            crossAxisAlignment: CrossAxisAlignment.center,
-            children: [
-              Stack(
-                children: [
-                  Image.asset(
-                    'assets/Iraqpost.png',
-                    fit: BoxFit.cover,
-                    height: 120,
-                    width: 146,
+      body: Padding(
+        padding: const EdgeInsets.only(top: 80),
+        child: Center(
+          child: SizedBox(
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              mainAxisSize: MainAxisSize.min,
+              crossAxisAlignment: CrossAxisAlignment.center,
+              children: [
+                const Padding(
+                  padding: EdgeInsets.all(8.0),
+                  child: Image(
+                    image: AssetImage('assets/IraqHome2.png'),
+                    height: 150,
+                    fit: BoxFit.fill,
                   ),
-                  const Positioned(
-                      child: Align(
-                    alignment: Alignment.bottomRight,
-                    child: Text(
-                      'IRAQ POST',
-                      style: TextStyle(
-                          fontFamily: 'Ruvary', fontWeight: FontWeight.bold),
-                      textAlign: TextAlign.center,
-                    ),
-                  )),
-                ],
-              ),
-              const SizedBox(
-                  height:
-                      10), // Adjust the height of the space between the image and the text
-              const Text(
-                'POWERED BY BANAN',
-                style: TextStyle(
-                  color: Color.fromARGB(255, 8, 88, 17),
-                  fontFamily: 'Notosans',
-                  fontSize: 15,
-                  fontWeight: FontWeight.w400,
                 ),
-              ),
-              const SizedBox(
-                  height:
-                      20), // Adjust the height of the space between the two text widgets
-              const Text.rich(
-                TextSpan(
-                  children: [
-                    TextSpan(
-                      text: 'welcome to Iraq Post and enjoy our service',
-                      style: TextStyle(
-                        color: Colors.black,
-                        fontFamily: 'Notosans',
-                        fontSize: 25,
-                        fontWeight: FontWeight.w500,
-                      ),
-                    ),
-                    TextSpan(
-                      text: 'enjoy ',
-                      style: TextStyle(
-                        color: Colors.black,
-                        fontSize: 25,
-                        fontWeight: FontWeight.w500,
-                      ),
-                    ),
-                    TextSpan(
-                      text: 'our service',
-                      style: TextStyle(
-                        color: Colors.black,
-                        fontSize: 25,
-                        fontWeight: FontWeight.w500,
-                      ),
-                    ),
-                  ],
-                ),
-                textAlign: TextAlign.center, // Center-align the text
-                maxLines: 4, // Limit text to four lines
-                overflow:
-                    TextOverflow.ellipsis, // Use ellipsis (...) for overflow
-              ),
-              const SizedBox(height: 20), // Add space below the text widget
-              ElevatedButton(
-                onPressed: () {
-                  // Add your navigation logic here
-                },
-                style: ElevatedButton.styleFrom(
-                  backgroundColor: const Color.fromARGB(
-                      255, 8, 49, 111), // Set button color to dark blue
-                ),
-                child: const Padding(
-                  padding: EdgeInsets.symmetric(horizontal: 60),
+                Padding(
+                  padding:
+                      const EdgeInsets.symmetric(horizontal: 40, vertical: 10),
                   child: Text(
-                    'Register',
-                    style: TextStyle(fontSize: 20, color: Colors.white),
-                  ),
-                ),
-              ),
-              const SizedBox(height: 10), // Add space below the Register button
-              ElevatedButton(
-                onPressed: () {
-                  // Add your navigation logic here
-                },
-                style: ElevatedButton.styleFrom(
-                  backgroundColor: Colors.white,
-                  side: const BorderSide(
-                    color: Color.fromARGB(255, 12, 6, 118),
-                  ), // Set button color to white
-                ),
-                child: const Padding(
-                  padding: EdgeInsets.symmetric(horizontal: 70),
-                  child: Text(
-                    'Login',
-                    style: TextStyle(
-                      fontSize: 20,
-                      color: Color.fromARGB(255, 8, 49, 111),
+                    "Welcome to Iraq Post and enjoy our service",
+                    textAlign: TextAlign.center,
+                    style: GoogleFonts.notoSansArabic(
+                      color: Colors.black,
+                      fontSize: 24,
+                      fontWeight: FontWeight.w400,
+                      letterSpacing: -0.48,
                     ),
                   ),
                 ),
-              ),
-              const SizedBox(height: 10),
-              GestureDetector(
-                onTap: () {},
-                child: const Text(
-                  'Continue as a guest',
-                  style: TextStyle(
-                    fontSize: 15,
-                    fontWeight: FontWeight.bold,
-                    color: Color.fromARGB(255, 8, 49, 111),
-                    decoration: TextDecoration.underline,
+                const SizedBox(height: 14),
+                SizedBox(
+                  width: 343,
+                  height: 60,
+                  child: Padding(
+                    padding: const EdgeInsets.symmetric(vertical: 8),
+                    child: ElevatedButton(
+                      onPressed: () {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => const RegisterPage()),
+                        ); // Add your navigation logic or any action you want to perform when the button is pressed
+                      },
+                      style: ElevatedButton.styleFrom(
+                        backgroundColor: const Color(0xFF234274),
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(8),
+                        ),
+                      ),
+                      child: Padding(
+                        padding: const EdgeInsets.only(bottom: 5),
+                        child: Text("Register",
+                            style: GoogleFonts.notoSansArabic(
+                              color: const Color(0xFFF7FAFF),
+                              fontSize: 18,
+                              fontWeight: FontWeight.w600,
+                              height: 0.08,
+                              letterSpacing: -0.36,
+                            )),
+                      ),
+                    ),
                   ),
                 ),
-              ),
-            ],
+                const SizedBox(height: 14),
+                SizedBox(
+                  width: 343,
+                  height: 60,
+                  child: Padding(
+                    padding: const EdgeInsets.symmetric(vertical: 8),
+                    child: ElevatedButton(
+                      onPressed: () {
+                        // Add your navigation logic or any action you want to perform when the button is pressed
+                      },
+                      style: ElevatedButton.styleFrom(
+                        backgroundColor: Colors.white,
+                        shape: RoundedRectangleBorder(
+                          side: const BorderSide(color: Color(0xFF709FC1)),
+                          borderRadius: BorderRadius.circular(8),
+                        ),
+                      ),
+                      child: Padding(
+                        padding: const EdgeInsets.only(bottom: 5),
+                        child: Text("Login",
+                            style: GoogleFonts.notoSansArabic(
+                              color: const Color(0xFF264980),
+                              fontSize: 18,
+                              fontWeight: FontWeight.w600,
+                              height: 0.08,
+                              letterSpacing: -0.36,
+                            )),
+                      ),
+                    ),
+                  ),
+                ),
+                const SizedBox(height: 28),
+                Text("Continue as a guest",
+                    style: GoogleFonts.notoSansArabic(
+                        decoration: TextDecoration.underline,
+                        fontSize: 18,
+                        color: const Color(0xFF264980),
+                        fontWeight: FontWeight.w600,
+                        letterSpacing: -0.36,
+                        height: 0.08)),
+                const SizedBox(height: 60),
+                Text(
+                  "POWERED BY BANAN",
+                  style: GoogleFonts.notoSansArabic(
+                    color: const Color(0xFFFFB500),
+                    fontSize: 16,
+                    fontWeight: FontWeight.w500,
+                    height: 0.09,
+                    letterSpacing: -0.32,
+                  ),
+                ),
+              ],
+            ),
           ),
         ),
       ),
