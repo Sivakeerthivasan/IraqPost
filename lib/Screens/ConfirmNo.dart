@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:iraq_post/Screens/Aboutyou_screen.dart';
+
+import 'ConfirmNo.dart';
 
 class ConfirmNo extends StatefulWidget {
   const ConfirmNo({super.key});
@@ -10,21 +13,6 @@ class ConfirmNo extends StatefulWidget {
 
 class _ConfirmNoState extends State<ConfirmNo> {
   bool allOTPFilled = false;
-  bool isButtonActive = false;
-
-  @override
-  void initState() {
-    super.initState();
-    allOTPFilled = false;
-    isButtonActive = false;
-  }
-
-  void _updateOTPFilled(bool isFilled) {
-    setState(() {
-      allOTPFilled = isFilled;
-      isButtonActive = isFilled;
-    });
-  }
 
   @override
   Widget build(BuildContext context) {
@@ -35,12 +23,12 @@ class _ConfirmNoState extends State<ConfirmNo> {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Container(
-                width: 374,
-                height: 40,
+                width: 393,
+                height: 50,
                 padding: const EdgeInsets.only(
                   top: 8,
                   left: 10,
-                  right: 20,
+                  right: 20, // Adjusted the right padding
                   bottom: 8,
                 ),
                 decoration: const BoxDecoration(
@@ -130,7 +118,8 @@ class _ConfirmNoState extends State<ConfirmNo> {
                 children: [
                   Padding(
                     padding: const EdgeInsets.only(left: 15),
-                    child: Image.asset('assets/Iraq.png'),
+                    child: Image.asset(
+                        'assets/Iraq.png'), // Corrected image loading
                   ),
                   const SizedBox(height: 32),
                   Padding(
@@ -148,7 +137,7 @@ class _ConfirmNoState extends State<ConfirmNo> {
                             letterSpacing: -0.48,
                           ),
                         ),
-                        const SizedBox(height: 18),
+                        const SizedBox(height: 20),
                         Text(
                           "Enter the code sent to +966123456789 to verify activate your account",
                           style: GoogleFonts.notoSansArabic(
@@ -158,37 +147,34 @@ class _ConfirmNoState extends State<ConfirmNo> {
                             letterSpacing: -0.32,
                           ),
                         ),
-                        const SizedBox(height: 40),
+                        const SizedBox(height: 28),
                         Row(
                           mainAxisAlignment: MainAxisAlignment.start,
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
                             const SizedBox(width: 5),
-                            _OTPBox(onFilled: _updateOTPFilled),
+                            _OTPBox(setAllOTPFilled),
                             const SizedBox(width: 30),
-                            _OTPBox(onFilled: _updateOTPFilled),
+                            _OTPBox(setAllOTPFilled),
                             const SizedBox(width: 30),
-                            _OTPBox(onFilled: _updateOTPFilled),
+                            _OTPBox(setAllOTPFilled),
                             const SizedBox(width: 30),
-                            _OTPBox(onFilled: _updateOTPFilled),
+                            _OTPBox(setAllOTPFilled),
                             const SizedBox(width: 25),
-                            _OTPBox(onFilled: _updateOTPFilled),
+                            _OTPBox(setAllOTPFilled),
                           ],
                         ),
-                        const SizedBox(height: 30),
+                        const SizedBox(height: 20),
                         Container(
                           width: 353,
                           height: 90,
                           padding: const EdgeInsets.symmetric(
-                            horizontal: 18,
-                            vertical: 10,
-                          ),
+                              horizontal: 18, vertical: 10),
                           clipBehavior: Clip.antiAlias,
                           decoration: ShapeDecoration(
                             color: const Color(0xFFE9EDF2),
                             shape: RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(8),
-                            ),
+                                borderRadius: BorderRadius.circular(8)),
                           ),
                           child: Column(
                             mainAxisSize: MainAxisSize.min,
@@ -228,12 +214,10 @@ class _ConfirmNoState extends State<ConfirmNo> {
                                       size: 18,
                                       color: Color(0xFF264980),
                                     ),
-                                    const SizedBox(
-                                      width: 4,
-                                    ),
+                                    const SizedBox(width: 4),
                                     Padding(
                                       padding: const EdgeInsets.only(
-                                          bottom: 4, right: 15),
+                                          bottom: 3, right: 26),
                                       child: Text(
                                         'Send a new code',
                                         style: GoogleFonts.notoSansArabic(
@@ -262,7 +246,17 @@ class _ConfirmNoState extends State<ConfirmNo> {
                             mainAxisAlignment: MainAxisAlignment.start,
                             crossAxisAlignment: CrossAxisAlignment.center,
                             children: [
-                              const SizedBox(height: 28),
+                              const SizedBox(
+                                width: 343,
+                                height: 45,
+                                child: Row(
+                                  mainAxisSize: MainAxisSize.min,
+                                  mainAxisAlignment: MainAxisAlignment.center,
+                                  crossAxisAlignment: CrossAxisAlignment.center,
+                                  children: [],
+                                ),
+                              ),
+                              const SizedBox(height: 12),
                               SizedBox(
                                 width: 343,
                                 height: 45,
@@ -270,22 +264,12 @@ class _ConfirmNoState extends State<ConfirmNo> {
                                   padding: const EdgeInsets.symmetric(
                                       horizontal: 18),
                                   child: ElevatedButton(
-                                    onPressed: isButtonActive
-                                        ? () {
-                                            // Add your functionality here
-                                            Navigator.push(
-                                              context,
-                                              MaterialPageRoute(
-                                                builder: (context) =>
-                                                    const ConfirmDetails(),
-                                              ),
-                                            );
-                                          }
-                                        : null,
+                                    onPressed: allOTPFilled ? () {} : null,
                                     style: ElevatedButton.styleFrom(
-                                      backgroundColor: isButtonActive
-                                          ? Colors.blue
+                                      backgroundColor: allOTPFilled
+                                          ? const Color(0xFF264980)
                                           : const Color(0xFFE9EDF2),
+                                      // Change text color as needed
                                       shape: RoundedRectangleBorder(
                                         borderRadius: BorderRadius.circular(8),
                                       ),
@@ -299,9 +283,10 @@ class _ConfirmNoState extends State<ConfirmNo> {
                                       children: [
                                         Text(
                                           'Verify',
+                                          // Change button text as needed
                                           style: GoogleFonts.notoSansArabic(
-                                            color: isButtonActive
-                                                ? Colors.white
+                                            color: allOTPFilled
+                                                ? const Color(0xFFE9EDF2)
                                                 : const Color(0xFF5F6979),
                                             fontSize: 18,
                                             fontWeight: FontWeight.w600,
@@ -325,6 +310,28 @@ class _ConfirmNoState extends State<ConfirmNo> {
             ],
           ),
         ),
+      ),
+    );
+  }
+
+  void setAllOTPFilled(bool filled) {
+    setState(() {
+      allOTPFilled = filled;
+    });
+  }
+}
+
+class ConfirmDetails extends StatelessWidget {
+  const ConfirmDetails({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        title: const Text('Confirm Details'),
+      ),
+      body: const Center(
+        child: Text('This is the Confirm Details page'),
       ),
     );
   }
@@ -352,6 +359,37 @@ class _GreenTick extends StatelessWidget {
   }
 }
 
+class _CircularIndicator extends StatelessWidget {
+  final String? number;
+  final bool active;
+
+  const _CircularIndicator({Key? key, this.number, required this.active});
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      width: 30,
+      height: 29,
+      decoration: BoxDecoration(
+        shape: BoxShape.circle,
+        color: active ? Colors.white : Colors.grey,
+        border: Border.all(
+          color: const Color(0xFF9198A3),
+        ),
+      ),
+      child: Center(
+        child: Text(
+          number!,
+          style: const TextStyle(
+            color: Color(0xFF5F6979),
+            fontWeight: FontWeight.normal,
+          ),
+        ),
+      ),
+    );
+  }
+}
+
 class _Line extends StatelessWidget {
   final Color color;
 
@@ -370,7 +408,7 @@ class _Line extends StatelessWidget {
 class _OTPBox extends StatefulWidget {
   final Function(bool) onFilled;
 
-  const _OTPBox({required this.onFilled});
+  const _OTPBox(this.onFilled);
 
   @override
   _OTPBoxState createState() => _OTPBoxState();
@@ -406,13 +444,8 @@ class _OTPBoxState extends State<_OTPBox> {
         _borderColor = const Color(0xFF9198A3);
         _textColor = Colors.black;
       }
-
-      widget.onFilled(_checkAllBoxesFilled());
+      widget.onFilled(_controller.text.length == 1);
     });
-  }
-
-  bool _checkAllBoxesFilled() {
-    return _controller.text.length == 5;
   }
 
   @override
@@ -439,26 +472,8 @@ class _OTPBoxState extends State<_OTPBox> {
           border: InputBorder.none,
         ),
         onChanged: (value) {
-          setState(() {
-            widget.onFilled(_checkAllBoxesFilled());
-          });
+          setState(() {});
         },
-      ),
-    );
-  }
-}
-
-class ConfirmDetails extends StatelessWidget {
-  const ConfirmDetails({super.key});
-
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: const Text('Confirm Details'),
-      ),
-      body: const Center(
-        child: Text('Confirm Details Page'),
       ),
     );
   }

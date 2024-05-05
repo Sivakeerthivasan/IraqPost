@@ -18,23 +18,27 @@ class RegisterPage extends StatefulWidget {
 
 class _RegisterPageState extends State<RegisterPage> {
   bool _isButtonEnabled = false;
+  bool _isNationalIDFilled = false;
   bool _isEmailFilled = false;
   bool _isPasswordFilled = false;
   bool _isConfirmPasswordFilled = false;
-
+  final _nationalIDFocusNode = FocusNode();
   final _emailFocusNode = FocusNode();
   final _passwordFocusNode = FocusNode();
   final _confirmPasswordFocusNode = FocusNode();
 
   void _checkButtonEnabled() {
     setState(() {
-      _isButtonEnabled =
-          _isEmailFilled && _isPasswordFilled && _isConfirmPasswordFilled;
+      _isButtonEnabled = _isNationalIDFilled &&
+          _isEmailFilled &&
+          _isPasswordFilled &&
+          _isConfirmPasswordFilled;
     });
   }
 
   @override
   void dispose() {
+    _nationalIDFocusNode.dispose();
     _emailFocusNode.dispose();
     _passwordFocusNode.dispose();
     _confirmPasswordFocusNode.dispose();
@@ -50,8 +54,8 @@ class _RegisterPageState extends State<RegisterPage> {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Container(
-                width: 374,
-                height: 40,
+                width: 393,
+                height: 50,
                 padding: const EdgeInsets.only(
                   top: 8,
                   left: 10,
@@ -176,69 +180,66 @@ class _RegisterPageState extends State<RegisterPage> {
                             color: const Color(0xFF404C5F),
                           ),
                         ),
-                        const SizedBox(height: 16),
-                        Padding(
-                          padding: const EdgeInsets.only(right: 40),
-                          child: Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceAround,
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              Container(
-                                width: 154,
-                                height: 28,
-                                child: Padding(
-                                  padding: const EdgeInsets.symmetric(),
-                                  child: ElevatedButton(
-                                    onPressed: () {
-                                      // Handle onPressed for Register with Email button
-                                    },
-                                    style: ElevatedButton.styleFrom(
-                                      backgroundColor: const Color(0xFF234274),
-                                      shape: RoundedRectangleBorder(
-                                        borderRadius: BorderRadius.circular(4),
-                                      ),
-                                    ),
-                                    child: Text(
-                                      'Email ID',
-                                      style: GoogleFonts.notoSansArabic(
-                                        color: const Color(0xFFF7FAFF),
-                                        fontSize: 12,
-                                        fontWeight: FontWeight.w500,
-                                        height: 0.12,
-                                        letterSpacing: -0.24,
-                                      ),
-                                    ),
-                                  ),
+                        const SizedBox(height: 26),
+                        Row(
+                          crossAxisAlignment: CrossAxisAlignment.baseline,
+                          textBaseline: TextBaseline.alphabetic,
+                          children: [
+                            Text(
+                              'National ID',
+                              style: GoogleFonts.notoSansArabic(
+                                  color: const Color(0xFF0B1627),
+                                  fontSize: 14,
+                                  fontWeight: FontWeight.w500,
+                                  height: 0.10,
+                                  letterSpacing: -0.28),
+                            ),
+                            const Text(
+                              ' *',
+                              style: TextStyle(
+                                color: Colors.red,
+                                fontSize: 14,
+                                height: 0.09,
+                                letterSpacing: -0.32,
+                              ),
+                            ),
+                          ],
+                        ),
+                        const SizedBox(height: 12),
+                        SizedBox(
+                          height: 44,
+                          width: 345,
+                          child: TextField(
+                            keyboardType: TextInputType.number,
+                            focusNode: _nationalIDFocusNode,
+                            onChanged: (value) {
+                              setState(() {
+                                _isNationalIDFilled = value.isNotEmpty;
+                                _checkButtonEnabled();
+                              });
+                            },
+                            style: const TextStyle(
+                              color: Color(0xFF234274),
+                              fontWeight: FontWeight.w400,
+                            ),
+                            decoration: InputDecoration(
+                              labelText: _isNationalIDFilled
+                                  ? null
+                                  : 'Enter your National ID',
+                              border: OutlineInputBorder(
+                                borderRadius: BorderRadius.circular(8.0),
+                                borderSide: BorderSide(
+                                  color: _nationalIDFocusNode.hasFocus ||
+                                          _isNationalIDFilled
+                                      ? Colors.blue
+                                      : Colors.grey,
                                 ),
                               ),
-                              const SizedBox(width: 2),
-                              // Add some space between the buttons
-                              Container(
-                                width: 154,
-                                height: 28,
-                                child: ElevatedButton(
-                                  onPressed: () {
-                                    // Handle onPressed for Register with National ID button
-                                  },
-                                  style: ElevatedButton.styleFrom(
-                                    backgroundColor: Colors.white,
-                                    shape: RoundedRectangleBorder(
-                                      side: const BorderSide(
-                                          color: Color(0xFF709FC1)),
-                                      borderRadius: BorderRadius.circular(4),
-                                    ),
-                                  ),
-                                  child: Text(' National ID',
-                                      style: GoogleFonts.notoSansArabic(
-                                        color: const Color(0xFF234274),
-                                        fontSize: 12,
-                                        fontWeight: FontWeight.w500,
-                                        height: 0.12,
-                                        letterSpacing: -0.24,
-                                      )),
-                                ),
+                              contentPadding: const EdgeInsets.symmetric(
+                                vertical: 10,
+                                horizontal: 20,
                               ),
-                            ],
+                            ),
                           ),
                         ),
                         const SizedBox(height: 26),
@@ -279,7 +280,7 @@ class _RegisterPageState extends State<RegisterPage> {
                               });
                             },
                             style: const TextStyle(
-                              color: Color(0xFF5F6979),
+                              color: Color(0xFF234274),
                               fontWeight: FontWeight.w400,
                             ),
                             decoration: InputDecoration(
@@ -303,7 +304,7 @@ class _RegisterPageState extends State<RegisterPage> {
                             ),
                           ),
                         ),
-                        const SizedBox(height: 30),
+                        const SizedBox(height: 26),
                         Row(
                           crossAxisAlignment: CrossAxisAlignment.baseline,
                           textBaseline: TextBaseline.alphabetic,
@@ -351,17 +352,13 @@ class _RegisterPageState extends State<RegisterPage> {
                                   Icons.visibility_off_outlined,
                                   size: 20,
                                 ),
-                                color: const Color(0xff5F6979),
+                                color: const Color(0xFF5F6979),
                                 onPressed: () {},
                               ),
                               border: OutlineInputBorder(
                                 borderRadius: BorderRadius.circular(8.0),
-                                borderSide: BorderSide(
-                                  color: _passwordFocusNode.hasFocus
-                                      ? Colors.red
-                                      : (_isPasswordFilled
-                                          ? Colors.blue
-                                          : Colors.grey),
+                                borderSide: const BorderSide(
+                                  color: Color(0xFF234274),
                                 ),
                               ),
                               contentPadding: const EdgeInsets.symmetric(
@@ -371,7 +368,7 @@ class _RegisterPageState extends State<RegisterPage> {
                             ),
                           ),
                         ),
-                        const SizedBox(height: 30),
+                        const SizedBox(height: 26),
                         Row(
                           crossAxisAlignment: CrossAxisAlignment.baseline,
                           textBaseline: TextBaseline.alphabetic,
@@ -437,7 +434,7 @@ class _RegisterPageState extends State<RegisterPage> {
                             ),
                           ),
                         ),
-                        const SizedBox(height: 38),
+                        const SizedBox(height: 22),
                         SizedBox(
                           height: 45,
                           width: 343,
@@ -589,7 +586,7 @@ class _RegisterPageState extends State<RegisterPage> {
                                 ),
                                 minimumSize: const Size(343, 45),
                                 padding: const EdgeInsets.symmetric(
-                                    horizontal: 40, vertical: 20)),
+                                    horizontal: 40, vertical: 10)),
                             child: Text(
                               'Register',
                               textAlign: TextAlign.center,
@@ -604,7 +601,7 @@ class _RegisterPageState extends State<RegisterPage> {
                             ),
                           ),
                         ),
-                        const SizedBox(height: 18),
+                        const SizedBox(height: 20),
                         Container(
                           width: 343,
                           height: 20,

@@ -50,8 +50,8 @@ class _AboutYou extends State<AboutYou> {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Container(
-                width: 374,
-                height: 40,
+                width: 393,
+                height: 50,
                 padding: const EdgeInsets.only(
                   top: 8,
                   left: 10,
@@ -222,7 +222,7 @@ class _AboutYou extends State<AboutYou> {
                               });
                             },
                             style: const TextStyle(
-                              color: Color(0xFF5F6979),
+                              color: Color(0xFF234274),
                               fontWeight: FontWeight.w400,
                             ),
                             decoration: InputDecoration(
@@ -284,6 +284,9 @@ class _AboutYou extends State<AboutYou> {
                                 _checkButtonEnabled();
                               });
                             },
+                            style: const TextStyle(
+                              color: Color(0xFF234274),
+                            ),
                             decoration: InputDecoration(
                               labelText: _isPasswordFilled
                                   ? null
@@ -344,6 +347,9 @@ class _AboutYou extends State<AboutYou> {
                                 _checkButtonEnabled();
                               });
                             },
+                            style: const TextStyle(
+                              color: Color(0xFF234274),
+                            ),
                             decoration: InputDecoration(
                               labelText: _isConfirmPasswordFilled
                                   ? null

@@ -23,8 +23,8 @@ class _VerifyEmailState extends State<VerifyEmail> {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Container(
-                width: 374,
-                height: 40,
+                width: 393,
+                height: 50,
                 padding: const EdgeInsets.only(
                   top: 8,
                   left: 10,
@@ -162,91 +162,100 @@ class _VerifyEmailState extends State<VerifyEmail> {
                           ),
                         ),
                         const SizedBox(height: 40),
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.start,
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            const SizedBox(width: 5),
-                            _OTPBox(setAllOTPFilled),
-                            const SizedBox(width: 30),
-                            _OTPBox(setAllOTPFilled),
-                            const SizedBox(width: 30),
-                            _OTPBox(setAllOTPFilled),
-                            const SizedBox(width: 30),
-                            _OTPBox(setAllOTPFilled),
-                            const SizedBox(width: 25),
-                            _OTPBox(setAllOTPFilled),
-                          ],
+                        Padding(
+                          padding: const EdgeInsets.only(left: 7),
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.start,
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              const SizedBox(width: 5),
+                              _OTPBox(setAllOTPFilled),
+                              const SizedBox(width: 30),
+                              _OTPBox(setAllOTPFilled),
+                              const SizedBox(width: 30),
+                              _OTPBox(setAllOTPFilled),
+                              const SizedBox(width: 30),
+                              _OTPBox(setAllOTPFilled),
+                              const SizedBox(width: 25),
+                              _OTPBox(setAllOTPFilled),
+                            ],
+                          ),
                         ),
                         const SizedBox(height: 30),
-                        Container(
-                          width: 353,
-                          height: 90,
-                          padding: const EdgeInsets.symmetric(
-                              horizontal: 18, vertical: 10),
-                          clipBehavior: Clip.antiAlias,
-                          decoration: ShapeDecoration(
-                            color: const Color(0xFFE9EDF2),
-                            shape: RoundedRectangleBorder(
-                                borderRadius: BorderRadius.circular(8)),
-                          ),
-                          child: Column(
-                            mainAxisSize: MainAxisSize.min,
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            crossAxisAlignment: CrossAxisAlignment.center,
-                            children: [
-                              const Text(
-                                '00:02:56',
-                                style: TextStyle(
-                                  color: Color(0xFF5F6979),
-                                  fontSize: 14,
-                                  fontWeight: FontWeight.w600,
-                                  height: 0.10,
-                                  letterSpacing: -0.28,
-                                ),
+                        Padding(
+                          padding: const EdgeInsets.only(left: 7),
+                          child: Container(
+                            width: 353,
+                            height: 90,
+                            padding: const EdgeInsets.only(right: 0),
+                            clipBehavior: Clip.antiAlias,
+                            decoration: ShapeDecoration(
+                              color: const Color(0xFFE9EDF2),
+                              shape: RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(8),
                               ),
-                              const SizedBox(height: 20),
-                              GestureDetector(
-                                onTap: () {
-                                  // Add functionality to resend email
-                                },
-                                child: Row(
-                                  mainAxisSize: MainAxisSize.min,
-                                  mainAxisAlignment: MainAxisAlignment.center,
-                                  crossAxisAlignment: CrossAxisAlignment.center,
-                                  children: [
-                                    Container(
-                                      width: 16,
-                                      height: 16,
-                                      clipBehavior: Clip.antiAlias,
-                                      decoration: const BoxDecoration(),
-                                      child: const Stack(children: []),
-                                    ),
-                                    const SizedBox(width: 0),
-                                    const Icon(
-                                      Icons.refresh,
-                                      size: 18,
-                                      color: Color(0xFF264980),
-                                    ),
-                                    const SizedBox(width: 4),
-                                    Padding(
-                                      padding: const EdgeInsets.only(bottom: 3),
-                                      child: Text(
-                                        'Resend the verification email',
-                                        style: GoogleFonts.notoSansArabic(
-                                          color: const Color(0xFF264980),
-                                          fontSize: 14,
-                                          fontWeight: FontWeight.w600,
-                                          decoration: TextDecoration.underline,
-                                          height: 0.10,
-                                          letterSpacing: -0.28,
+                            ),
+                            child: Column(
+                              mainAxisSize: MainAxisSize.min,
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              crossAxisAlignment: CrossAxisAlignment.center,
+                              children: [
+                                const Text(
+                                  '00:02:56',
+                                  style: TextStyle(
+                                    color: Color(0xFF5F6979),
+                                    fontSize: 14,
+                                    fontWeight: FontWeight.w600,
+                                    height: 0.10,
+                                    letterSpacing: -0.28,
+                                  ),
+                                ),
+                                const SizedBox(height: 20),
+                                GestureDetector(
+                                  onTap: () {
+                                    // Add functionality to resend email
+                                  },
+                                  child: Row(
+                                    mainAxisSize: MainAxisSize.min,
+                                    mainAxisAlignment: MainAxisAlignment.center,
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.center,
+                                    children: [
+                                      Container(
+                                        width: 16,
+                                        height: 16,
+                                        clipBehavior: Clip.antiAlias,
+                                        decoration: const BoxDecoration(),
+                                        child: const Stack(children: []),
+                                      ),
+                                      const SizedBox(width: 0),
+                                      const Icon(
+                                        Icons.refresh,
+                                        size: 18,
+                                        color: Color(0xFF264980),
+                                      ),
+                                      const SizedBox(width: 4),
+                                      Padding(
+                                        padding:
+                                            const EdgeInsets.only(bottom: 3),
+                                        child: Text(
+                                          'Resend the verification email',
+                                          style: GoogleFonts.notoSansArabic(
+                                            color: const Color(0xFF264980),
+                                            fontSize: 14,
+                                            fontWeight: FontWeight.w600,
+                                            decoration:
+                                                TextDecoration.underline,
+                                            height: 0.10,
+                                            letterSpacing: -0.28,
+                                          ),
                                         ),
                                       ),
-                                    ),
-                                  ],
+                                    ],
+                                  ),
                                 ),
-                              ),
-                            ],
+                              ],
+                            ),
                           ),
                         ),
                         const SizedBox(height: 32),
@@ -286,8 +295,7 @@ class _VerifyEmailState extends State<VerifyEmail> {
                                 width: 343,
                                 height: 45,
                                 child: Padding(
-                                  padding: const EdgeInsets.symmetric(
-                                      horizontal: 18),
+                                  padding: const EdgeInsets.only(right: 8),
                                   child: ElevatedButton(
                                     onPressed: allOTPFilled
                                         ? () {
