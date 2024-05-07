@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:iraq_post/Screens/Register_screen.dart';
 
@@ -34,17 +35,16 @@ class WelcomeScreen extends StatelessWidget {
                       shape: RoundedRectangleBorder(
                           borderRadius: BorderRadius.circular(8)),
                     ),
-                    child: const Row(
+                    child: Row(
                       mainAxisSize: MainAxisSize.min,
                       mainAxisAlignment: MainAxisAlignment.center,
                       crossAxisAlignment: CrossAxisAlignment.center,
                       children: [
                         Text(
                           'عربي',
-                          style: TextStyle(
-                            color: Color(0xFF5F6979),
+                          style: GoogleFonts.notoSansArabic(
+                            color: const Color(0xFF5F6979),
                             fontSize: 16,
-                            fontFamily: 'Noto Sans Arabic',
                             fontWeight: FontWeight.w600,
                             height: 0.09,
                             letterSpacing: -0.32,
@@ -63,17 +63,16 @@ class WelcomeScreen extends StatelessWidget {
                       shape: RoundedRectangleBorder(
                           borderRadius: BorderRadius.circular(8)),
                     ),
-                    child: const Row(
+                    child: Row(
                       mainAxisSize: MainAxisSize.min,
                       mainAxisAlignment: MainAxisAlignment.center,
                       crossAxisAlignment: CrossAxisAlignment.center,
                       children: [
                         Text(
                           'English',
-                          style: TextStyle(
-                            color: Color(0xFFF7FAFF),
+                          style: GoogleFonts.notoSansArabic(
+                            color: const Color(0xFFF7FAFF),
                             fontSize: 16,
-                            fontFamily: 'Noto Sans Arabic',
                             fontWeight: FontWeight.w600,
                             height: 0.09,
                             letterSpacing: -0.32,
@@ -88,7 +87,7 @@ class WelcomeScreen extends StatelessWidget {
           ),
         ),
         body: Padding(
-          padding: const EdgeInsets.only(bottom: 30),
+          padding: const EdgeInsets.only(bottom: 10),
           child: Center(
             child: SizedBox(
               child: Column(
@@ -105,8 +104,7 @@ class WelcomeScreen extends StatelessWidget {
                     ),
                   ),
                   Padding(
-                    padding: const EdgeInsets.symmetric(
-                        horizontal: 40, vertical: 10),
+                    padding: const EdgeInsets.symmetric(horizontal: 30),
                     child: Text(
                       "Welcome to Iraq Post and enjoy our service",
                       textAlign: TextAlign.center,
@@ -119,7 +117,8 @@ class WelcomeScreen extends StatelessWidget {
                     ),
                   ),
                   const SizedBox(height: 14),
-                  SizedBox(
+                  // ignore: sized_box_for_whitespace
+                  Container(
                     width: 343,
                     height: 60,
                     child: Padding(
@@ -163,7 +162,6 @@ class WelcomeScreen extends StatelessWidget {
                           // Add your navigation logic or any action you want to perform when the button is pressed
                         },
                         style: ElevatedButton.styleFrom(
-                          backgroundColor: Colors.white,
                           shape: RoundedRectangleBorder(
                             side: const BorderSide(color: Color(0xFF709FC1)),
                             borderRadius: BorderRadius.circular(8),
@@ -192,7 +190,7 @@ class WelcomeScreen extends StatelessWidget {
                           fontWeight: FontWeight.w600,
                           letterSpacing: -0.36,
                           height: 0.08)),
-                  const SizedBox(height: 60),
+                  const SizedBox(height: 42),
                   Text(
                     "POWERED BY BANAN",
                     style: GoogleFonts.notoSansArabic(

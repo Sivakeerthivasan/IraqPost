@@ -31,6 +31,8 @@ class _SplashState extends State<Splash> {
       body: Center(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
+          crossAxisAlignment: CrossAxisAlignment.center,
+          mainAxisSize: MainAxisSize.min,
           children: [
             const Image(
               image: AssetImage('assets/IraqHome2.png'),

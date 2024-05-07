@@ -5,6 +5,7 @@ import 'dart:ui';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter/widgets.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:iraq_post/Screens/Verify_email.dart';
@@ -218,10 +219,11 @@ class _RegisterPageState extends State<RegisterPage> {
                                 _checkButtonEnabled();
                               });
                             },
-                            style: const TextStyle(
-                              color: Color(0xFF234274),
-                              fontWeight: FontWeight.w400,
-                            ),
+                            style: GoogleFonts.notoSansArabic(
+                                color: const Color(0xFF234274),
+                                fontWeight: FontWeight.w400,
+                                fontSize: 16,
+                                letterSpacing: -0.32),
                             decoration: InputDecoration(
                               labelText: _isNationalIDFilled
                                   ? null
@@ -279,10 +281,11 @@ class _RegisterPageState extends State<RegisterPage> {
                                 _checkButtonEnabled();
                               });
                             },
-                            style: const TextStyle(
-                              color: Color(0xFF234274),
-                              fontWeight: FontWeight.w400,
-                            ),
+                            style: GoogleFonts.notoSansArabic(
+                                color: const Color(0xFF234274),
+                                fontWeight: FontWeight.w400,
+                                fontSize: 16,
+                                letterSpacing: -0.32),
                             decoration: InputDecoration(
                               labelText:
                                   _isEmailFilled ? null : 'Enter your email',
@@ -376,8 +379,8 @@ class _RegisterPageState extends State<RegisterPage> {
                             Text(
                               'Confirm password',
                               style: GoogleFonts.notoSansArabic(
-                                fontWeight: FontWeight.normal,
                                 color: const Color(0xff0B1627),
+                                fontWeight: FontWeight.w500,
                                 fontSize: 14,
                                 height: 0.09,
                                 letterSpacing: -0.32,
@@ -471,9 +474,19 @@ class _RegisterPageState extends State<RegisterPage> {
                                                 crossAxisAlignment:
                                                     CrossAxisAlignment.start,
                                                 children: [
-                                                  const SizedBox(height: 12),
-                                                  const Text(
-                                                      'Jhonson@gmail.com'),
+                                                  const SizedBox(height: 6),
+                                                  Text(
+                                                    'Jhonson@gmail.com',
+                                                    style: GoogleFonts
+                                                        .notoSansArabic(
+                                                            color: const Color(
+                                                                0xFF404C5f),
+                                                            fontWeight:
+                                                                FontWeight.w400,
+                                                            fontSize: 14,
+                                                            letterSpacing:
+                                                                -0.28),
+                                                  ),
                                                   const SizedBox(height: 32),
                                                   Row(
                                                     mainAxisAlignment:
@@ -580,7 +593,7 @@ class _RegisterPageState extends State<RegisterPage> {
                             style: ElevatedButton.styleFrom(
                                 backgroundColor: _isButtonEnabled
                                     ? const Color(0xff234274)
-                                    : const Color(0xFFF7FAFF),
+                                    : const Color(0xFFE9EDF2),
                                 shape: RoundedRectangleBorder(
                                   borderRadius: BorderRadius.circular(8),
                                 ),
@@ -592,7 +605,7 @@ class _RegisterPageState extends State<RegisterPage> {
                               textAlign: TextAlign.center,
                               style: GoogleFonts.notoSansArabic(
                                   color: _isButtonEnabled
-                                      ? Colors.white
+                                      ? const Color(0xFFF7FAFF)
                                       : const Color(0xFF5F6979),
                                   fontSize: 18,
                                   fontWeight: FontWeight.w600,
@@ -664,7 +677,6 @@ class _CircularIndicator extends StatelessWidget {
       height: 30,
       decoration: BoxDecoration(
         shape: BoxShape.circle,
-        color: active ? Colors.white : Colors.grey,
         border: Border.all(
           color: const Color(0xff9198a3),
         ),
@@ -672,11 +684,12 @@ class _CircularIndicator extends StatelessWidget {
       child: Center(
         child: Text(
           number,
-          style: const TextStyle(
-            color: Color.fromARGB(255, 86, 92, 101),
-            fontWeight: FontWeight.w500,
-            fontSize: 14,
-          ),
+          style: GoogleFonts.notoSansArabic(
+              color: const Color(0xFF5F6979),
+              fontWeight: FontWeight.w500,
+              fontSize: 14,
+              height: 0.10,
+              letterSpacing: -0.28),
         ),
       ),
     );

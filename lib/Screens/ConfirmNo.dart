@@ -261,13 +261,13 @@ class _ConfirmNoState extends State<ConfirmNo> {
                                 width: 343,
                                 height: 45,
                                 child: Padding(
-                                  padding: const EdgeInsets.symmetric(
-                                      horizontal: 18),
+                                  padding:
+                                      const EdgeInsets.symmetric(horizontal: 6),
                                   child: ElevatedButton(
                                     onPressed: allOTPFilled ? () {} : null,
                                     style: ElevatedButton.styleFrom(
                                       backgroundColor: allOTPFilled
-                                          ? const Color(0xFF264980)
+                                          ? const Color(0xFF234274)
                                           : const Color(0xFFE9EDF2),
                                       // Change text color as needed
                                       shape: RoundedRectangleBorder(
@@ -286,7 +286,7 @@ class _ConfirmNoState extends State<ConfirmNo> {
                                           // Change button text as needed
                                           style: GoogleFonts.notoSansArabic(
                                             color: allOTPFilled
-                                                ? const Color(0xFFE9EDF2)
+                                                ? const Color(0xFFF7FAFF)
                                                 : const Color(0xFF5F6979),
                                             fontSize: 18,
                                             fontWeight: FontWeight.w600,
